@@ -83,13 +83,14 @@ dns:
   fallback:
      - https://dns.cloudflare.com/dns-query
      - https://public.dns.iij.jp/dns-query
-     - https://jp.tiar.app/dns-query
-     - https://jp.tiarap.org/dns-query
      - https://dns.google/dns-query
-  #fallback-filter:
-     #geoip: true # 默认
-     #ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
-       #- 240.0.0.0/4
+  fallback-filter:
+    geoip: true # 默认
+    geosite:
+      - gfw
+    ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+      - 240.0.0.0/4
+      - 0.0.0.0/32
 
 # 1. clash DNS 请求逻辑：
 #   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。

@@ -1,3 +1,4 @@
 DOMAIN-KEYWORD,candycake
 #PROCESS-NAME,vmnat.exe
-DOMAIN-KEYWORD,xsus
+#DOMAIN-KEYWORD,xsus
+PROCESS-NAME,dingtalk.exe
