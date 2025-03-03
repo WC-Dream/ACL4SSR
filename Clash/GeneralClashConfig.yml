@@ -82,20 +82,20 @@ dns:
     - 119.29.29.29
     - tls://223.5.5.5:853 
   nameserver:
-     - 223.5.5.5 # 阿里DNS
-     - 119.29.29.29 # 腾讯DNS
-     - 114.114.114.114 # 114DNS
-     - https://doh.pub/dns-query
-     - https://223.5.5.5/dns-query
+    - 223.5.5.5 # 阿里DNS
+    - 119.29.29.29 # 腾讯DNS
+    - 114.114.114.114 # 114DNS
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
   nameserver-policy:
-  "geosite:gfw":
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.google/dns-query
+    "geosite:gfw":
+      - https://dns.cloudflare.com/dns-query
+      - https://dns.google/dns-query
 
   fallback:
-     - https://dns.cloudflare.com/dns-query
-     - https://public.dns.iij.jp/dns-query
-     - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://public.dns.iij.jp/dns-query
+    - https://dns.google/dns-query
   fallback-filter:
     geoip: true # 默认
     ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
