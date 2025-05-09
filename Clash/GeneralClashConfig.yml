@@ -102,7 +102,6 @@ dns:
      - '+.pool.ntp.org'
      - 'time1.cloud.tencent.com'
   default-nameserver:
-    - 117.50.10.10
     - 119.29.29.29
     - 223.5.5.5
     - 8.8.8.8
@@ -110,7 +109,6 @@ dns:
   nameserver:
     - tls://dns.alidns.com
     - tls://dot.pub
-    - https://doh-pure.onedns.net/dns-query
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
     - https://dns.cloudflare.com/dns-query
@@ -125,7 +123,6 @@ dns:
     'geosite:cn':
       - tls://dns.alidns.com
       - tls://dot.pub
-      - https://doh-pure.onedns.net/dns-query
       - https://doh.pub/dns-query
 
   fallback:
