@@ -111,8 +111,8 @@ dns:
     - tls://dot.pub
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.google/dns-query
+   # - https://dns.cloudflare.com/dns-query
+    #- https://dns.google/dns-query
   #nameserver-policy:
   #  'geosite: gfw':
   #    - 94.140.14.140
