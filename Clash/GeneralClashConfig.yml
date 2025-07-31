@@ -79,8 +79,6 @@ dns:
        - 'time.*.com'
        - '+.market.xiaomi.com'
        - localhost.ptlogin2.qq.com
-       - www.msftncsi.com
-       - www.msftconnecttest.com
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
