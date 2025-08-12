@@ -346,7 +346,8 @@ dns:
   enable: true
   ipv6: false
   prefer-h3: false
-  enhanced-mode: fake-ip # 模式：redir-host或fake-ip
+  #模式redir-host或fake-ip
+  enhanced-mode: fake-ip
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
