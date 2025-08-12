@@ -267,38 +267,38 @@ rule-providers:
     url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
     path: ./ruleset/SpeedTest.list
 rules:
-  - RULE-SET,MyDirect,🎯 全球直连
-  - GEOIP,LAN,🎯 全球直连,no-resolve
-  - RULE-SET,FCM,📢 谷歌FCM
-  - RULE-SET,GoogleFCM,📢 谷歌FCM
-  - RULE-SET,Onedrive,Ⓜ️ 微软云盘
-  - RULE-SET,Microsoft,Ⓜ️ 微软服务
-  - RULE-SET,GlobalMedia,🌍 国外媒体
-  - RULE-SET,TikTok,🌍 国外媒体
-  - GEOIP,NETFLIX,🌍 国外媒体,no-resolve
-  - RULE-SET,Epic,🎮 游戏平台
-  - RULE-SET,Sony,🎮 游戏平台
-  - RULE-SET,Steam,🎮 游戏平台
-  - RULE-SET,MySteam,🎮 游戏平台
-  - RULE-SET,Proxy,🚀 节点选择
-  - RULE-SET,MyProxy,🚀 节点选择
-  - RULE-SET,AI,🚀 节点选择
-  - RULE-SET,SpeedTest,🚀 节点选择
-  - GEOIP,GOOGLE,🚀 节点选择,no-resolve
-  - GEOSITE,APPLE,🍎 苹果服务
-  - GEOSITE,TELEGRAM,🚀 节点选择
-  - GEOIP,TELEGRAM,🚀 节点选择,no-resolve
+  - "RULE-SET,MyDirect,🎯 全球直连"
+  - "GEOIP,LAN,🎯 全球直连,no-resolve"
+  - "RULE-SET,FCM,📢 谷歌FCM"
+  - "RULE-SET,GoogleFCM,📢 谷歌FCM"
+  - "RULE-SET,Onedrive,Ⓜ️ 微软云盘"
+  - "RULE-SET,Microsoft,Ⓜ️ 微软服务"
+  - "RULE-SET,GlobalMedia,🌍 国外媒体"
+  - "RULE-SET,TikTok,🌍 国外媒体"
+  - "GEOIP,NETFLIX,🌍 国外媒体,no-resolve"
+  - "RULE-SET,Epic,🎮 游戏平台"
+  - "RULE-SET,Sony,🎮 游戏平台"
+  - "RULE-SET,Steam,🎮 游戏平台"
+  - "RULE-SET,MySteam,🎮 游戏平台"
+  - "RULE-SET,Proxy,🚀 节点选择"
+  - "RULE-SET,MyProxy,🚀 节点选择"
+  - "RULE-SET,AI,🚀 节点选择"
+  - "RULE-SET,SpeedTest,🚀 节点选择"
+  - "GEOIP,GOOGLE,🚀 节点选择,no-resolve"
+  - "GEOSITE,APPLE,🍎 苹果服务"
+  - "GEOSITE,TELEGRAM,🚀 节点选择"
+  - "GEOIP,TELEGRAM,🚀 节点选择,no-resolve"
   #- GEOSITE,YOUTUBE,YouTube
   #- GEOSITE,GOOGLE,Google
   #- GEOSITE,NETFLIX,Netflix
   #- GEOSITE,SPOTIFY,Spotify
   #- GEOSITE,MICROSOFT,Microsoft
-  - GEOSITE,CN,🎯 全球直连
-  - GEOSITE,PRIVATE,🎯 全球直连
-  - GEOIP,PRIVATE,🎯 全球直连,no-resolve
-  - GEOIP,CN,🎯 全球直连,no-resolve
+  - "GEOSITE,CN,🎯 全球直连"
+  - "GEOSITE,PRIVATE,🎯 全球直连"
+  - "GEOIP,PRIVATE,🎯 全球直连,no-resolve"
+  - "GEOIP,CN,🎯 全球直连,no-resolve"
   #- DST-PORT,22,SSH(22端口)
-  - MATCH,🚀 节点选择
+  - "MATCH,🚀 节点选择"
 sniffer:
   sniff:
     TLS:
