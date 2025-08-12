@@ -1,0 +1,381 @@
+proxy-groups:
+  - name: 🚀 节点选择
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
+    type: select
+    proxies: 
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: 🚀 手动切换1
+    #icon: https://cdn.jsdmirror.com/gh/shindgewongxj/WHATSINStash@master/icon/select.png
+    include-all: true
+    type: select
+  - name: ♻️ 自动选择
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
+    include-all: true
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 200
+    lazy: false
+
+  - name: 🌍 国外媒体
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Bot.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: 📢 谷歌FCM
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Cryptocurrency_3.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: Ⓜ️ 微软云盘
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/PayPal.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: Ⓜ️ 微软服务
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: 🍎 苹果服务
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: 🎮 游戏平台
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Apple_2.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  - name: 🎯 全球直连
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Google_Search.png
+    type: select
+    proxies: 
+      - DIRECT
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+  - name: 🐟 漏网之鱼
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
+    type: select
+    proxies: 
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT
+  #- name: SSH(22端口)
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Server.png
+    #type: select
+    #proxies: *a1
+  
+  - name: 🇭🇰 香港自动
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png
+    include-all: true
+    filter: (?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong
+    #exclude-filter: (?i)家宽|家庭|家庭宽带|商宽|商业宽带|星链|Starlink|落地|0.[0-5]|低倍率|省流|大流量|实验性
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: false
+  - name: 🇨🇳 台湾自动
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png
+    include-all: true
+    filter: (?i)台|新北|彰化|TW|Taiwan
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: false
+  - name: 🇺🇲 美国自动
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/United_States.png
+    include-all: true
+    filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 250
+    lazy: false
+  - name: 🇯🇵 日本自动
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Japan.png
+    include-all: true
+    filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: false
+  - name: 🇸🇬 狮城自动
+    #icon: https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Singapore.png
+    include-all: true
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: false
+  
+rule-providers:
+  FCM:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/FCM.txt
+  Onedrive:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list
+    path: ./ruleset/Onedrive.txt
+  Microsoft:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+    path: ./ruleset/Microsoft.txt  
+  Epic:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list
+    path: ./ruleset/Epic.txt
+  Sony:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+    path: ./ruleset/Sony.txt  
+  Steam:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
+    path: ./ruleset/Steam.txt  
+  MySteam:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/steam.list
+    path: ./ruleset/MySteam.txt 
+  GlobalMedia:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+    path: ./ruleset/GlobalMedia.txt       
+  Proxy:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+    path: ./ruleset/Proxy.txt
+  MyProxy:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/proxy.list
+    path: ./ruleset/MyProxy.txt
+  MyDirect:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/direct.list
+    path: ./ruleset/MyDirect.txt     
+
+  AI:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://ruleset.skk.moe/Clash/non_ip/ai.txt
+    path: ./ruleset/AI.txt
+  TikTok:
+    type: http
+    behavior: classical
+    format: text
+    interval: 86400
+    url: https://cdn.jsdmirror.com/gh/powerfullz/override-rules@master/ruleset/TikTok.list
+    path: ./ruleset/TikTok.list
+  GoogleFCM:
+    type: http
+    behavior: classical
+    interval: 86400
+    format: text
+    path: ./ruleset/FirebaseCloudMessaging.list
+    url: https://cdn.jsdmirror.com/gh/powerfullz/override-rules@master/ruleset/FirebaseCloudMessaging.list
+  SpeedTest:
+    type: http
+    behavior: domain
+    format: text
+    interval: 86400
+    url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
+    path: ./ruleset/SpeedTest.list
+rules:
+  - RULE-SET,MyDirect,🎯 全球直连
+  - GEOIP,LAN,🎯 全球直连,no-resolve
+  - RULE-SET,FCM,📢 谷歌FCM
+  - RULE-SET,GoogleFCM,📢 谷歌FCM
+  - RULE-SET,Onedrive,Ⓜ️ 微软云盘
+  - RULE-SET,Microsoft,Ⓜ️ 微软服务
+  - RULE-SET,GlobalMedia,🌍 国外媒体
+  - RULE-SET,TikTok,🌍 国外媒体
+  - GEOIP,NETFLIX,🌍 国外媒体,no-resolve
+  - RULE-SET,Epic,🎮 游戏平台
+  - RULE-SET,Sony,🎮 游戏平台
+  - RULE-SET,Steam,🎮 游戏平台
+  - RULE-SET,MySteam,🎮 游戏平台
+  - RULE-SET,Proxy,🚀 节点选择
+  - RULE-SET,MyProxy,🚀 节点选择
+  - RULE-SET,AI,🚀 节点选择
+  - RULE-SET,SpeedTest,🚀 节点选择
+  - GEOIP,GOOGLE,🚀 节点选择,no-resolve
+  - GEOSITE,APPLE,🍎 苹果服务
+  - GEOSITE,TELEGRAM,🚀 节点选择
+  - GEOIP,TELEGRAM,🚀 节点选择,no-resolve
+  #- GEOSITE,YOUTUBE,YouTube
+  #- GEOSITE,GOOGLE,Google
+  #- GEOSITE,NETFLIX,Netflix
+  #- GEOSITE,SPOTIFY,Spotify
+  #- GEOSITE,MICROSOFT,Microsoft
+  - GEOSITE,CN,🎯 全球直连
+  - GEOSITE,PRIVATE,🎯 全球直连
+  - GEOIP,PRIVATE,🎯 全球直连,no-resolve
+  - GEOIP,CN,🎯 全球直连,no-resolve
+  #- DST-PORT,22,SSH(22端口)
+  - MATCH,🚀 节点选择
+sniffer:
+  sniff:
+    TLS:
+      ports:
+        - 443
+        - 8443
+    HTTP:
+      ports:
+        - 80
+        - 8080
+        - 8880
+    QUIC:
+      ports:
+        - 443
+        - 8443
+  override-destination: false
+  enable: true
+  force-dns-mapping: true
+  skip-domain:
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - +.push.apple.com
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: false
+  enhanced-mode: fake-ip # 模式：redir-host或fake-ip
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+    - 8.8.8.8
+    - system
+  nameserver:
+    - tls://223.5.5.5
+    - tls://1.12.12.12
+    - tls://dot.pub
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
+    - system
+  fallback:
+    - tls://unfiltered.adguard-dns.com
+    - tls://1.1.1.1
+    - tls://8.8.8.8
+    - https://1.1.1.1/dns-query
+    #- https://dns.cloudflare.com/dns-query
+    - https://public.dns.iij.jp/dns-query
+    - https://dns.google/dns-query
+    - https://dns.quad9.net/dns-query
+  proxy-server-nameserver:
+    - tls://223.5.5.5
+    - tls://1.12.12.12
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
+geodata-mode: true
+geox-url:
+  geoip: https://cdn.jsdmirror.com/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
+  geosite: https://cdn.jsdmirror.com/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
+  mmdb: https://cdn.jsdmirror.com/gh/Loyalsoldier/geoip@release/Country.mmdb
+  asn: https://cdn.jsdmirror.com/gh/Loyalsoldier/geoip@release/GeoLite2-ASN.mmdb
