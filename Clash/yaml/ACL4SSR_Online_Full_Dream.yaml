@@ -1,7 +1,7 @@
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    proxies: 
+    proxies:
       - ♻️ 自动选择
       - 🚀 手动切换1
       - 🇺🇲 美国自动
@@ -23,7 +23,7 @@ proxy-groups:
 
   - name: 🌍 国外媒体
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -35,7 +35,7 @@ proxy-groups:
       - DIRECT
   - name: 📢 谷歌FCM
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -47,7 +47,7 @@ proxy-groups:
       - DIRECT
   - name: Ⓜ️ 微软云盘
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -59,7 +59,7 @@ proxy-groups:
       - DIRECT
   - name: Ⓜ️ 微软服务
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -71,7 +71,7 @@ proxy-groups:
       - DIRECT
   - name: 🍎 苹果服务
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -83,7 +83,7 @@ proxy-groups:
       - DIRECT
   - name: 🎮 游戏平台
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -95,7 +95,7 @@ proxy-groups:
       - DIRECT
   - name: 🎯 全球直连
     type: select
-    proxies: 
+    proxies:
       - DIRECT
       - 🚀 节点选择
       - ♻️ 自动选择
@@ -107,7 +107,7 @@ proxy-groups:
       - 🇯🇵 日本自动
   - name: 🐟 漏网之鱼
     type: select
-    proxies: 
+    proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🚀 手动切换1
@@ -117,7 +117,7 @@ proxy-groups:
       - 🇸🇬 狮城自动
       - 🇯🇵 日本自动
       - DIRECT
-  
+
   - name: 🇭🇰 香港自动
     include-all: true
     filter: (?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong
@@ -158,7 +158,7 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: false
-  
+
 rule-providers:
   FCM:
     type: http
@@ -180,7 +180,7 @@ rule-providers:
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
-    path: ./ruleset/Microsoft.txt  
+    path: ./ruleset/Microsoft.txt
   Epic:
     type: http
     behavior: classical
@@ -194,28 +194,28 @@ rule-providers:
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
-    path: ./ruleset/Sony.txt  
+    path: ./ruleset/Sony.txt
   Steam:
     type: http
     behavior: classical
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list
-    path: ./ruleset/Steam.txt  
+    path: ./ruleset/Steam.txt
   MySteam:
     type: http
     behavior: classical
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/steam.list
-    path: ./ruleset/MySteam.txt 
+    path: ./ruleset/MySteam.txt
   GlobalMedia:
     type: http
     behavior: classical
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
-    path: ./ruleset/GlobalMedia.txt       
+    path: ./ruleset/GlobalMedia.txt
   Proxy:
     type: http
     behavior: classical
@@ -236,7 +236,7 @@ rule-providers:
     format: text
     interval: 86400
     url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/direct.list
-    path: ./ruleset/MyDirect.txt     
+    path: ./ruleset/MyDirect.txt
 
   AI:
     type: http
