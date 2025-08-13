@@ -82,6 +82,7 @@ proxy-groups:
       - 🇯🇵 日本自动
       - DIRECT
   - name: 🎮 游戏平台
+    include-all: true
     type: select
     proxies:
       - 🚀 节点选择
