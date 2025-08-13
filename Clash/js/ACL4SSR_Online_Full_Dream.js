@@ -1,0 +1,497 @@
+async function main(config) {
+    // 固定的 proxy-groups（保持你原来的不变）
+    const proxyGroups = [
+        {
+            name: "🚀 节点选择",
+            type: "select",
+            proxies: [
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "🚀 手动切换1",
+            "include-all": true,
+            type: "select",
+        },
+        {
+            name: "♻️ 自动选择",
+            "include-all": true,
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 200,
+            lazy: false,
+        },
+        {
+            name: "🌍 国外媒体",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "📢 谷歌FCM",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "Ⓜ️ 微软云盘",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "Ⓜ️ 微软服务",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "🍎 苹果服务",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "🎮 游戏平台",
+            "include-all": true,
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
+            name: "🎯 全球直连",
+            type: "select",
+            proxies: [
+                "DIRECT",
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+            ],
+        },
+        {
+            name: "🐟 漏网之鱼",
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+
+        {
+            name: "🇭🇰 香港自动",
+            "include-all": true,
+            filter: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 150,
+            lazy: false,
+        },
+        {
+            name: "🇨🇳 台湾自动",
+            "include-all": true,
+            filter: "(?i)台|新北|彰化|TW|Taiwan",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 150,
+            lazy: false,
+        },
+        {
+            name: "🇺🇲 美国自动",
+            "include-all": true,
+            filter:
+                "(?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 250,
+            lazy: false,
+        },
+        {
+            name: "🇯🇵 日本自动",
+            "include-all": true,
+            filter: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 150,
+            lazy: false,
+        },
+        {
+            name: "🇸🇬 狮城自动",
+            "include-all": true,
+            filter: "(?i)新加坡|坡|狮城|SG|Singapore",
+            type: "url-test",
+            url: "https://www.gstatic.com/generate_204",
+            interval: 300,
+            tolerance: 150,
+            lazy: false,
+        }
+    ];
+    // 赋值给 config["proxy-groups"]
+    config["proxy-groups"] = proxyGroups;
+
+    // 确保有 rule-providers
+    if (!config['rule-providers']) {
+        config['rule-providers'] = {};
+    }
+
+    // 这里直接用你的原有 rule-providers 定义
+    config["rule-providers"] = Object.assign(config["rule-providers"], {
+        MyDirect: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/direct.list",
+            path: "./ruleset/MyDirect.txt",
+        },
+        FCM: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list",
+            path: "./ruleset/FCM.txt",
+        },
+        Onedrive: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list",
+            path: "./ruleset/Onedrive.txt",
+        },
+        Microsoft: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list",
+            path: "./ruleset/Microsoft.txt",
+        },
+        Epic: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list",
+            path: "./ruleset/Epic.txt",
+        },
+        Sony: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list",
+            path: "./ruleset/Sony.txt",
+        },
+        Steam: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list",
+            path: "./ruleset/Steam.txt",
+        },
+        MySteam: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/steam.list",
+            path: "./ruleset/MySteam.txt",
+        },
+        GlobalMedia: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list",
+            path: "./ruleset/GlobalMedia.txt",
+        },
+        Proxy: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list",
+            path: "./ruleset/Proxy.txt",
+        },
+        MyProxy: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/proxy.list",
+            path: "./ruleset/MyProxy.txt",
+        },
+        AI: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://ruleset.skk.moe/Clash/non_ip/ai.txt",
+            path: "./ruleset/AI.txt",
+        },
+        TikTok: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://cdn.jsdmirror.com/gh/powerfullz/override-rules@master/ruleset/TikTok.list",
+            path: "./ruleset/TikTok.list",
+        },
+        GoogleFCM: {
+            type: "http",
+            behavior: "classical",
+            interval: 86400,
+            format: "text",
+            path: "./ruleset/FirebaseCloudMessaging.list",
+            url: "https://cdn.jsdmirror.com/gh/powerfullz/override-rules@master/ruleset/FirebaseCloudMessaging.list",
+        },
+        // SpeedTest: {
+        //     type: "http",
+        //     behavior: "domain",
+        //     format: "text",
+        //     interval: 86400,
+        //     url: "https://ruleset.skk.moe/Clash/domainset/speedtest.txt",
+        //     path: "./ruleset/SpeedTest.list",
+        // },
+        // ... 这里省略你的全部其他 rule-providers 定义
+    });
+
+    const providerToProxyGroup = {
+        FCM: "📢 谷歌FCM",
+        Onedrive: "Ⓜ️ 微软云盘",
+        Microsoft: "Ⓜ️ 微软服务",
+        Epic: "🎮 游戏平台",
+        Sony: "🎮 游戏平台",
+        Steam: "🎮 游戏平台",
+        MySteam: "🎮 游戏平台",
+        GlobalMedia: "🌍 国外媒体",
+        Proxy: "🚀 节点选择",
+        MyProxy: "🚀 节点选择",
+        MyDirect: "🎯 全球直连",
+        AI: "🚀 节点选择",
+        TikTok: "🌍 国外媒体",
+        GoogleFCM: "📢 谷歌FCM",
+        SpeedTest: "🚀 节点选择",
+        // 其他 provider 可以根据需求继续加
+    };
+
+
+    // 新的 rules 数组
+    config.rules = [];
+
+    config.rules.push("GEOIP,LAN,🎯 全球直连,no-resolve");
+
+    // 遍历 rule-providers，获取内容并解析
+    for (const [name, provider] of Object.entries(config["rule-providers"])) {
+        try {
+            const res = await fetch(provider.url);
+            const text = await res.text();
+
+            const lines = text
+                .split('\n')
+                .map(line => line.trim())
+                .filter(line => line && !line.startsWith('#'));
+
+            const proxyGroup = providerToProxyGroup[name] || "🚀 节点选择"; // 默认代理组
+
+            for (const rule of lines) {
+                if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) {
+                    // 跳过 USER-AGENT 开头的规则
+                    continue;
+                }
+
+                if (
+                    rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")
+                ) {
+                    // 跳过 USER-AGENT 开头的规则 和 包含特定字符串的规则
+                    continue;
+                }
+
+                if (rule.includes(",")) {
+                    const parts = rule.split(",");
+                    const lastPart = parts[parts.length - 1];
+
+                    if (lastPart === proxyGroup) {
+                        config.rules.push(rule);
+                    } else if (rule.endsWith(",no-resolve")) {
+                        const withoutNoResolve = rule.slice(0, -",no-resolve".length);
+                        config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
+                    } else {
+                        config.rules.push(`${rule},${proxyGroup}`);
+                    }
+                } else {
+                    config.rules.push(`${rule},${proxyGroup}`);
+                }
+            }
+        } catch (e) {
+            console.log(`获取规则失败: ${name}`, e);
+        }
+    }
+
+
+
+
+
+    config.rules.push("GEOIP,NETFLIX,🌍 国外媒体,no-resolve");
+    config.rules.push("GEOIP,GOOGLE,🚀 节点选择,no-resolve");
+    config.rules.push("GEOSITE,APPLE,🍎 苹果服务");
+    config.rules.push("GEOSITE,TELEGRAM,🚀 节点选择");
+    config.rules.push("GEOIP,TELEGRAM,🚀 节点选择,no-resolve");
+    config.rules.push("GEOSITE,CN,🎯 全球直连");
+    config.rules.push("GEOSITE,PRIVATE,🎯 全球直连");
+    config.rules.push("GEOIP,PRIVATE,🎯 全球直连,no-resolve");
+    config.rules.push("GEOIP,CN,🎯 全球直连,no-resolve");
+
+    // 确保最后有 MATCH 规则
+    config.rules.push("MATCH,🚀 节点选择");
+
+
+    config.sniffer = {
+        sniff: {
+            TLS: {
+                ports: [443, 8443],
+            },
+            HTTP: {
+                ports: [80, 8080, 8880],
+            },
+            QUIC: {
+                ports: [443, 8443],
+            },
+        },
+        "override-destination": false,
+        enable: true,
+        "force-dns-mapping": true,
+        "skip-domain": [
+            "Mijia Cloud",
+            "dlg.io.mi.com",
+            "+.push.apple.com"
+        ],
+    };
+
+    config.dns = {
+        enable: true,
+        ipv6: false,
+        "prefer-h3": false,
+        "enhanced-mode": "fake-ip",
+        "default-nameserver": [
+            "119.29.29.29",
+            "223.5.5.5",
+            "8.8.8.8",
+            "system"
+        ],
+        nameserver: [
+            "tls://223.5.5.5",
+            "tls://1.12.12.12",
+            "tls://dot.pub",
+            "https://doh.pub/dns-query",
+            "https://223.5.5.5/dns-query",
+            "system"
+        ],
+        fallback: [
+            "tls://unfiltered.adguard-dns.com",
+            "tls://1.1.1.1",
+            "tls://8.8.8.8",
+            "https://1.1.1.1/dns-query",
+            //"https://dns.cloudflare.com/dns-query",
+            "https://public.dns.iij.jp/dns-query",
+            "https://dns.google/dns-query",
+            "https://dns.quad9.net/dns-query",
+        ],
+        "proxy-server-nameserver": [
+            "tls://223.5.5.5",
+            "tls://1.12.12.12",
+            "https://doh.pub/dns-query",
+            "https://223.5.5.5/dns-query"
+        ]
+    };
+
+    config["geodata-mode"] = true;
+    config["geox-url"] = {
+        geoip: "https://cdn.jsdmirror.com/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat",
+        geosite: "https://cdn.jsdmirror.com/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat",
+        mmdb: "https://cdn.jsdmirror.com/gh/Loyalsoldier/geoip@release/Country.mmdb",
+        asn: "https://cdn.jsdmirror.com/gh/Loyalsoldier/geoip@release/GeoLite2-ASN.mmdb",
+    };
+
+    return config;
+}
