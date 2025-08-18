@@ -1,4 +1,83 @@
 async function main(config) {
+
+    config.sniffer = {
+        sniff: {
+            TLS: {
+                ports: [443, 8443],
+            },
+            HTTP: {
+                ports: [80, 8080, 8880],
+            },
+            QUIC: {
+                ports: [443, 8443],
+            },
+        },
+        "override-destination": false,
+        enable: true,
+        "force-dns-mapping": true,
+        "skip-domain": [
+            "Mijia Cloud",
+            "dlg.io.mi.com",
+            "+.push.apple.com"
+        ],
+    };
+
+    config.dns = {
+        enable: true,
+        ipv6: false,
+        "prefer-h3": false,
+        "enhanced-mode": "fake-ip",
+        "default-nameserver": [
+            "119.29.29.29",
+            "223.5.5.5",
+            "8.8.8.8"
+        ],
+        nameserver: [
+            "tls://223.5.5.5",
+            "tls://dot.pub",
+            "https://doh.pub/dns-query",
+            "https://223.5.5.5/dns-query"
+        ],
+        fallback: [
+            "tls://1.1.1.1",
+            "tls://8.8.8.8",
+            "https://1.1.1.1/dns-query",
+            "https://public.dns.iij.jp/dns-query",
+            "https://dns.google/dns-query"
+        ],
+        "proxy-server-nameserver": [
+            "tls://223.5.5.5",
+            "https://doh.pub/dns-query",
+            "https://223.5.5.5/dns-query"
+        ],
+        "fake-ip-filter": [
+            "*.lan",
+            "*.local",
+            "*.arpa",
+            "time.*.com",
+            "ntp.*.com",
+            "time.*.com",
+            "+.market.xiaomi.com",
+            "localhost.ptlogin2.qq.com",
+            "*.msftncsi.com",
+            "www.msftconnecttest.com"
+        ],
+        "fallback-filter": {
+            domain: [
+                "+.google.com",
+                "+.facebook.com",
+                "+.youtube.com"
+            ],
+            geoip: true,
+            "geoip-code": "CN",
+            ipcidr: [
+                "240.0.0.0/4",
+                "0.0.0.0/32"
+            ]
+        }
+    };
+
+
     // 固定的 proxy-groups（保持你原来的不变）
     const proxyGroups = [
         {
@@ -425,65 +504,6 @@ async function main(config) {
     // 确保最后有 MATCH 规则
     config.rules.push("MATCH,🚀 节点选择");
 
-
-    config.sniffer = {
-        sniff: {
-            TLS: {
-                ports: [443, 8443],
-            },
-            HTTP: {
-                ports: [80, 8080, 8880],
-            },
-            QUIC: {
-                ports: [443, 8443],
-            },
-        },
-        "override-destination": false,
-        enable: true,
-        "force-dns-mapping": true,
-        "skip-domain": [
-            "Mijia Cloud",
-            "dlg.io.mi.com",
-            "+.push.apple.com"
-        ],
-    };
-
-    config.dns = {
-        enable: true,
-        ipv6: false,
-        "prefer-h3": false,
-        "enhanced-mode": "fake-ip",
-        "default-nameserver": [
-            "119.29.29.29",
-            "223.5.5.5",
-            "8.8.8.8",
-            "system"
-        ],
-        nameserver: [
-            "tls://223.5.5.5",
-            "tls://1.12.12.12",
-            "tls://dot.pub",
-            "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query",
-            "system"
-        ],
-        fallback: [
-            "tls://unfiltered.adguard-dns.com",
-            "tls://1.1.1.1",
-            "tls://8.8.8.8",
-            "https://1.1.1.1/dns-query",
-            //"https://dns.cloudflare.com/dns-query",
-            "https://public.dns.iij.jp/dns-query",
-            "https://dns.google/dns-query",
-            "https://dns.quad9.net/dns-query",
-        ],
-        "proxy-server-nameserver": [
-            "tls://223.5.5.5",
-            "tls://1.12.12.12",
-            "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query"
-        ]
-    };
 
     config["geodata-mode"] = true;
     config["geox-url"] = {
