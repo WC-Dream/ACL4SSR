@@ -68,7 +68,7 @@ async function main(config) {
                 "+.facebook.com",
                 "+.youtube.com"
             ],
-            geoip: true,
+            geoip: false,
             "geoip-code": "CN",
             ipcidr: [
                 "240.0.0.0/4",
