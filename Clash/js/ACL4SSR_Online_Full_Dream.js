@@ -34,19 +34,21 @@ async function main(config) {
         ],
         nameserver: [
             "tls://223.5.5.5",
+            "tls://1.12.12.12",
             "tls://dot.pub",
             "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query"
         ],
-        fallback: [
+        /*fallback: [
             "tls://1.1.1.1",
             "tls://8.8.8.8",
             "https://1.1.1.1/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"
-        ],
+        ],*/
         "proxy-server-nameserver": [
             "tls://223.5.5.5",
+            "tls://1.12.12.12",
             "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query"
         ],
@@ -61,8 +63,8 @@ async function main(config) {
             "localhost.ptlogin2.qq.com",
             "*.msftncsi.com",
             "www.msftconnecttest.com"
-        ],
-        "fallback-filter": {
+        ]
+        /*"fallback-filter": {
             domain: [
                 "+.google.com",
                 "+.facebook.com",
@@ -74,7 +76,7 @@ async function main(config) {
                 "240.0.0.0/4",
                 "0.0.0.0/32"
             ]
-        }
+        }*/
     };
 
 
