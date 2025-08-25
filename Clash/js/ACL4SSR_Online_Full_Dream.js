@@ -29,8 +29,7 @@ async function main(config) {
         "enhanced-mode": "fake-ip",
         "default-nameserver": [
             "119.29.29.29",
-            "223.5.5.5",
-            "8.8.8.8"
+            "223.5.5.5"
         ],
         nameserver: [
             "tls://223.5.5.5",
@@ -108,7 +107,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 200,
-            lazy: false,
+            lazy: true,
         },
         {
             name: "🌍 国外媒体",
@@ -240,7 +239,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
         },
         {
             name: "🇨🇳 台湾自动",
@@ -250,7 +249,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
         },
         {
             name: "🇺🇲 美国自动",
@@ -261,7 +260,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 250,
-            lazy: false,
+            lazy: true,
         },
         {
             name: "🇯🇵 日本自动",
@@ -271,7 +270,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
         },
         {
             name: "🇸🇬 狮城自动",
@@ -281,7 +280,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
         }
     ];
     // 赋值给 config["proxy-groups"]

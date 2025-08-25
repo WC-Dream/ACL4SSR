@@ -19,7 +19,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 200
-    lazy: false
+    lazy: true
 
   - name: 🌍 国外媒体
     type: select
@@ -126,7 +126,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 150
-    lazy: false
+    lazy: true
   - name: 🇨🇳 台湾自动
     include-all: true
     filter: (?i)台|新北|彰化|TW|Taiwan
@@ -134,7 +134,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 150
-    lazy: false
+    lazy: true
   - name: 🇺🇲 美国自动
     include-all: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California
@@ -142,7 +142,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 250
-    lazy: false
+    lazy: true
   - name: 🇯🇵 日本自动
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
@@ -150,7 +150,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 150
-    lazy: false
+    lazy: true
   - name: 🇸🇬 狮城自动
     include-all: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
@@ -158,7 +158,7 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 150
-    lazy: false
+    lazy: true
 
 rule-providers:
   FCM:
@@ -331,7 +331,6 @@ dns:
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
-    - 8.8.8.8
   nameserver:
     - tls://223.5.5.5
     - tls://1.12.12.12
