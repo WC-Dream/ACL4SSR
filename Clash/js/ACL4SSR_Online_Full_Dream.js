@@ -3,7 +3,7 @@ async function main(config) {
     config["disable-keep-alive"] = false;
     config["keep-alive-idle"] = 150;
     config["keep-alive-interval"] = 75;
-    config["tcp-concurrent"] = true;
+    config["tcp-concurrent"] = false;
 
     config.sniffer = {
         sniff: {
@@ -31,7 +31,10 @@ async function main(config) {
         enable: true,
         ipv6: false,
         "prefer-h3": false,
+        "use-hosts": true,
+        "use-system-hosts": true,
         "enhanced-mode": "fake-ip",
+        "fake-ip-range": "198.18.0.1/16",
         "default-nameserver": [
             "119.29.29.29",
             "223.5.5.5"
