@@ -5,6 +5,7 @@ async function main(config) {
     config["keep-alive-interval"] = 75;
     config["tcp-concurrent"] = false;
 
+    /*
     config.sniffer = {
         sniff: {
             TLS: {
@@ -25,7 +26,7 @@ async function main(config) {
             "dlg.io.mi.com",
             "+.push.apple.com"
         ],
-    };
+    };*/
 
     config.dns = {
         enable: true,
