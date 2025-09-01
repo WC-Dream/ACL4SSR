@@ -2,7 +2,7 @@ async function main(config) {
 
     config["disable-keep-alive"] = false;
     config["keep-alive-idle"] = 90;
-    config["keep-alive-interval"] = 75;
+    config["keep-alive-interval"] = 60;
     config["tcp-concurrent"] = false;
 
     /*
@@ -41,24 +41,19 @@ async function main(config) {
             "223.5.5.5"
         ],
         nameserver: [
-            "tls://223.5.5.5",
-            "tls://1.12.12.12",
-            "tls://dot.pub",
             "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query"
+            "https://223.5.5.5/dns-query",
+            "https://dns.alidns.com/dns-query"
         ],
-        /*fallback: [
-            "tls://1.1.1.1",
-            "tls://8.8.8.8",
-            "https://1.1.1.1/dns-query",
+        fallback: [
+            "https://dns.cloudflare.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"
-        ],*/
+        ],
         "proxy-server-nameserver": [
-            "tls://223.5.5.5",
-            "tls://1.12.12.12",
             "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query"
+            "https://223.5.5.5/dns-query",
+            "https://dns.alidns.com/dns-query"
         ],
         "fake-ip-filter": [
             "*.lan",
@@ -71,21 +66,32 @@ async function main(config) {
             "localhost.ptlogin2.qq.com",
             "*.msftncsi.com",
             "www.msftconnecttest.com"
-        ]
-        /*"fallback-filter": {
+        ],
+        "fallback-filter": {
             domain: [
                 "+.google.com",
                 "+.facebook.com",
                 "+.youtube.com"
             ],
-            geoip: false,
+            geoip: true,
             "geoip-code": "CN",
             ipcidr: [
                 "240.0.0.0/4",
                 "0.0.0.0/32"
             ]
-        }*/
+        },
+        "nameserver-policy": {
+            "geosite:cn": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ],
+            "geoip:cn": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ]
+        }
     };
+
 
 
     // 固定的 proxy-groups（保持你原来的不变）
