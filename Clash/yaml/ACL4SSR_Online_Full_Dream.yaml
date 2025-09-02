@@ -326,7 +326,7 @@ dns:
   enable: true
   ipv6: false
   prefer-h3: false
-  #模式redir-host或fake-ip
+  # 模式 redir-host 或 fake-ip
   enhanced-mode: fake-ip
   use-hosts: true
   use-system-hosts: true
@@ -335,25 +335,48 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
   nameserver:
-    - tls://223.5.5.5
-    - tls://1.12.12.12
-    - tls://dot.pub
     - https://doh.pub/dns-query
     - https://223.5.5.5/dns-query
-  #fallback:
-    #- tls://unfiltered.adguard-dns.com
-    #- tls://1.1.1.1
-    #- tls://8.8.8.8
-    #- https://1.1.1.1/dns-query
-    #- https://dns.cloudflare.com/dns-query
-    #- https://public.dns.iij.jp/dns-query
-    #- https://dns.google/dns-query
-    #- https://dns.quad9.net/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://dns.cloudflare.com/dns-query
+    - https://public.dns.iij.jp/dns-query
+    - https://dns.google/dns-query
   proxy-server-nameserver:
-    - tls://223.5.5.5
-    - tls://1.12.12.12
     - https://doh.pub/dns-query
     - https://223.5.5.5/dns-query
+    - https://dns.alidns.com/dns-query
+
+  fake-ip-filter:
+    - "+.lan"
+    - "+.local"
+    - "+.arpa"
+    - "time.*.com"
+    - "ntp.*.com"
+    - "+.market.xiaomi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "+.msftncsi.com"
+    - "www.msftconnecttest.com"
+
+  fallback-filter:
+    domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.youtube.com"
+    geoip: true
+    geoip-code: "CN"
+    ipcidr:
+      - "240.0.0.0/4"
+      - "0.0.0.0/32"
+
+  nameserver-policy:
+    "geosite:cn":
+      - "https://doh.pub/dns-query"
+      - "https://dns.alidns.com/dns-query"
+    "geoip:cn":
+      - "https://doh.pub/dns-query"
+      - "https://dns.alidns.com/dns-query"
+
 geodata-mode: true
 geox-url:
   geoip: https://cdn.jsdmirror.com/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat

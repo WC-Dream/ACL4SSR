@@ -1,8 +1,8 @@
 async function main(config) {
 
-    config["disable-keep-alive"] = false;
-    config["keep-alive-idle"] = 90;
-    config["keep-alive-interval"] = 60;
+    //config["disable-keep-alive"] = false;
+    //config["keep-alive-idle"] = 150;
+    //config["keep-alive-interval"] = 90;
     config["tcp-concurrent"] = false;
 
     /*
@@ -40,12 +40,12 @@ async function main(config) {
             "119.29.29.29",
             "223.5.5.5"
         ],
-        nameserver: [
+        "nameserver": [
             "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
         ],
-        fallback: [
+        "fallback": [
             "https://dns.cloudflare.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"
@@ -56,26 +56,25 @@ async function main(config) {
             "https://dns.alidns.com/dns-query"
         ],
         "fake-ip-filter": [
-            "*.lan",
-            "*.local",
-            "*.arpa",
+            "+.lan",
+            "+.local",
+            "+.arpa",
             "time.*.com",
             "ntp.*.com",
-            "time.*.com",
             "+.market.xiaomi.com",
             "localhost.ptlogin2.qq.com",
-            "*.msftncsi.com",
+            "+.msftncsi.com",
             "www.msftconnecttest.com"
         ],
         "fallback-filter": {
-            domain: [
+            "domain": [
                 "+.google.com",
                 "+.facebook.com",
                 "+.youtube.com"
             ],
-            geoip: true,
+            "geoip": true,
             "geoip-code": "CN",
-            ipcidr: [
+            "ipcidr": [
                 "240.0.0.0/4",
                 "0.0.0.0/32"
             ]
@@ -91,6 +90,7 @@ async function main(config) {
             ]
         }
     };
+
 
 
 
