@@ -216,6 +216,22 @@ async function main(config) {
             ],
         },
         {
+            name: "🔑 RemoteSSH",
+            "include-all": true,
+            type: "select",
+            proxies: [
+                "🚀 节点选择",
+                "♻️ 自动选择",
+                "🚀 手动切换1",
+                "🇺🇲 美国自动",
+                "🇭🇰 香港自动",
+                "🇨🇳 台湾自动",
+                "🇸🇬 狮城自动",
+                "🇯🇵 日本自动",
+                "DIRECT",
+            ],
+        },
+        {
             name: "🎯 全球直连",
             type: "select",
             proxies: [
@@ -420,6 +436,14 @@ async function main(config) {
             path: "./ruleset/FirebaseCloudMessaging.list",
             url: "https://cdn.jsdmirror.com/gh/powerfullz/override-rules@master/ruleset/FirebaseCloudMessaging.list",
         },
+        SSH: {
+            type: "http",
+            behavior: "classical",
+            interval: 86400,
+            format: "text",
+            path: "./ruleset/ssh.list",
+            url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/ssh.list",
+        },
         // SpeedTest: {
         //     type: "http",
         //     behavior: "domain",
@@ -431,7 +455,9 @@ async function main(config) {
         // ... 这里省略你的全部其他 rule-providers 定义
     });
 
-    const providerToProxyGroup = {
+    const providerToProxyGroup = {        
+        MyDirect: "🎯 全球直连",
+        MyProxy: "🚀 节点选择",
         FCM: "📢 谷歌FCM",
         Onedrive: "Ⓜ️ 微软云盘",
         Microsoft: "Ⓜ️ 微软服务",
@@ -440,16 +466,15 @@ async function main(config) {
         Steam: "🎮 游戏平台",
         MySteam: "🎮 游戏平台",
         GlobalMedia: "🌍 国外媒体",
-        Proxy: "🚀 节点选择",
-        MyProxy: "🚀 节点选择",
-        MyDirect: "🎯 全球直连",
+        SSH: "🔑 RemoteSSH",
+        Proxy: "🚀 节点选择", 
         AI: "🚀 节点选择",
         TikTok: "🌍 国外媒体",
         GoogleFCM: "📢 谷歌FCM",
         SpeedTest: "🚀 节点选择",
+        
         // 其他 provider 可以根据需求继续加
     };
-
 
     // 新的 rules 数组
     config.rules = [];
@@ -502,8 +527,6 @@ async function main(config) {
             console.log(`获取规则失败: ${name}`, e);
         }
     }
-
-
 
 
 
