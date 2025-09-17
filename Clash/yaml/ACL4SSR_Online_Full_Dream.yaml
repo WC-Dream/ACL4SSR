@@ -94,6 +94,19 @@ proxy-groups:
       - 🇸🇬 狮城自动
       - 🇯🇵 日本自动
       - DIRECT
+  - name: 🔑 RemoteSSH
+    include-all: true
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🚀 手动切换1
+      - 🇺🇲 美国自动
+      - 🇭🇰 香港自动
+      - 🇨🇳 台湾自动
+      - 🇸🇬 狮城自动
+      - 🇯🇵 日本自动
+      - DIRECT    
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -267,9 +280,17 @@ rule-providers:
     interval: 86400
     url: https://ruleset.skk.moe/Clash/domainset/speedtest.txt
     path: ./ruleset/SpeedTest.list
+  SSH:
+    type: http
+    behavior: domain
+    format: text
+    interval: 86400
+    url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/ssh.list
+    path: ./ruleset/ssh.list  
 rules:
   - "RULE-SET,MyDirect,🎯 全球直连"
   - "GEOIP,LAN,🎯 全球直连,no-resolve"
+  - "RULE-SET,MyProxy,🚀 节点选择"
   - "RULE-SET,FCM,📢 谷歌FCM"
   - "RULE-SET,GoogleFCM,📢 谷歌FCM"
   - "RULE-SET,Onedrive,Ⓜ️ 微软云盘"
@@ -281,8 +302,8 @@ rules:
   - "RULE-SET,Sony,🎮 游戏平台"
   - "RULE-SET,Steam,🎮 游戏平台"
   - "RULE-SET,MySteam,🎮 游戏平台"
+  - "RULE-SET,SSH,🔑 RemoteSSH"
   - "RULE-SET,Proxy,🚀 节点选择"
-  - "RULE-SET,MyProxy,🚀 节点选择"
   - "RULE-SET,AI,🚀 节点选择"
   - "RULE-SET,SpeedTest,🚀 节点选择"
   - "GEOIP,GOOGLE,🚀 节点选择,no-resolve"
