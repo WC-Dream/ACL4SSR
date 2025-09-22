@@ -45,11 +45,11 @@ async function main(config) {
             "https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
         ],
-        "fallback": [
+        /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"
-        ],
+        ],*/
         "proxy-server-nameserver": [
             "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
@@ -455,10 +455,11 @@ async function main(config) {
         // ... 这里省略你的全部其他 rule-providers 定义
     });
 
-    const providerToProxyGroup = {        
+    const providerToProxyGroup = {
         MyDirect: "🎯 全球直连",
         MyProxy: "🚀 节点选择",
         FCM: "📢 谷歌FCM",
+        GoogleFCM: "📢 谷歌FCM",
         SSH: "🔑 RemoteSSH",
         Onedrive: "Ⓜ️ 微软云盘",
         Microsoft: "Ⓜ️ 微软服务",
@@ -466,12 +467,11 @@ async function main(config) {
         Sony: "🎮 游戏平台",
         Steam: "🎮 游戏平台",
         MySteam: "🎮 游戏平台",
-        GlobalMedia: "🌍 国外媒体",
-        Proxy: "🚀 节点选择", 
-        AI: "🚀 节点选择",
-        TikTok: "🌍 国外媒体",
-        GoogleFCM: "📢 谷歌FCM",
+        AI: "🚀 节点选择",      
         SpeedTest: "🚀 节点选择",
+        GlobalMedia: "🌍 国外媒体",
+        TikTok: "🌍 国外媒体",  
+        Proxy: "🚀 节点选择",
         
         // 其他 provider 可以根据需求继续加
     };
@@ -481,6 +481,52 @@ async function main(config) {
 
     config.rules.push("GEOIP,LAN,🎯 全球直连,no-resolve");
 
+    // 先取出 providerToProxyGroup 的键顺序
+    const orderedNames = Object.keys(providerToProxyGroup);
+
+    // 遍历时按这个顺序来
+    for (const name of orderedNames) {
+        const provider = config["rule-providers"][name];
+        if (!provider) continue;
+
+        try {
+            const res = await fetch(provider.url);
+            const text = await res.text();
+
+            const lines = text
+                .split("\n")
+                .map(l => l.trim())
+                .filter(l => l && !l.startsWith("#"));
+
+            const proxyGroup = providerToProxyGroup[name] || "🚀 节点选择";
+
+            for (const rule of lines) {
+                if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) continue;
+                if (rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")) continue;
+
+                if (rule.includes(",")) {
+                    const parts = rule.split(",");
+                    const lastPart = parts[parts.length - 1];
+
+                    if (lastPart === proxyGroup) {
+                        config.rules.push(rule);
+                    } else if (rule.endsWith(",no-resolve")) {
+                        const withoutNoResolve = rule.slice(0, -",no-resolve".length);
+                        config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
+                    } else {
+                        config.rules.push(`${rule},${proxyGroup}`);
+                    }
+                } else {
+                    config.rules.push(`${rule},${proxyGroup}`);
+                }
+            }
+        } catch (e) {
+            console.log(`获取规则失败: ${name}`, e);
+        }
+    }
+
+    //老的，生成的顺序不对，注释
+    /*
     // 遍历 rule-providers，获取内容并解析
     for (const [name, provider] of Object.entries(config["rule-providers"])) {
         try {
@@ -527,7 +573,7 @@ async function main(config) {
             console.log(`获取规则失败: ${name}`, e);
         }
     }
-
+    */
 
 
     config.rules.push("GEOIP,NETFLIX,🌍 国外媒体,no-resolve");
