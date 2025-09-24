@@ -581,6 +581,7 @@ async function main(config) {
     config.rules.push("GEOSITE,APPLE,🍎 苹果服务");
     config.rules.push("GEOSITE,TELEGRAM,🚀 节点选择");
     config.rules.push("GEOIP,TELEGRAM,🚀 节点选择,no-resolve");
+    config.rules.push("GEOSITE,gfw,🚀 节点选择");
     config.rules.push("GEOSITE,CN,🎯 全球直连");
     config.rules.push("GEOSITE,PRIVATE,🎯 全球直连");
     config.rules.push("GEOIP,PRIVATE,🎯 全球直连,no-resolve");
