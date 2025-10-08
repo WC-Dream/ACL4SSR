@@ -1,9 +1,9 @@
 async function main(config) {
 
-    config["disable-keep-alive"] = false;
-    config["keep-alive-idle"] = 90;
-    config["keep-alive-interval"] = 60;
-    config["tcp-concurrent"] = false;
+    //config["disable-keep-alive"] = false;
+    //config["keep-alive-idle"] = 90;
+    //config["keep-alive-interval"] = 60;
+    config["tcp-concurrent"] = true;
 
     /*
     config.sniffer = {
