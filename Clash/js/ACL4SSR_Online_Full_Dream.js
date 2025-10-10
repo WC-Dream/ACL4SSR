@@ -64,7 +64,20 @@ async function main(config) {
             "+.market.xiaomi.com",
             "localhost.ptlogin2.qq.com",
             "+.msftncsi.com",
-            "www.msftconnecttest.com"
+            "www.msftconnecttest.com",
+            "mtalk.google.com",
+            "mtalk4.google.com",
+            "mtalk-staging.google.com",
+            "mtalk-dev.google.com",
+            "alt1-mtalk.google.com",
+            "alt1-mtalk.google.com",
+            "alt2-mtalk.google.com",
+            "alt3-mtalk.google.com",
+            "alt4-mtalk.google.com",
+            "alt5-mtalk.google.com",
+            "alt6-mtalk.google.com",
+            "alt7-mtalk.google.com",
+            "alt8-mtalk.google.com"
         ],
         "fallback-filter": {
             "domain": [
