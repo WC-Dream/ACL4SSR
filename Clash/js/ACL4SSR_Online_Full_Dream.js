@@ -1,8 +1,8 @@
 async function main(config) {
 
-    //config["disable-keep-alive"] = false;
-    //config["keep-alive-idle"] = 90;
-    //config["keep-alive-interval"] = 60;
+    config["disable-keep-alive"] = false;
+    config["keep-alive-idle"] = 60;
+    config["keep-alive-interval"] = 45;
     config["tcp-concurrent"] = true;
 
     /*
