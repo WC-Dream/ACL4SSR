@@ -299,7 +299,7 @@ async function main(config) {
             name: "🇺🇲 美国自动",
             "include-all": true,
             //filter:"(?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California",
-            filter:"(?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|United States|America|California)",
+            filter:"(?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|UnitedStates|United States|America|California)",
             type: "url-test",
             url: "https://www.gstatic.com/generate_204",
             interval: 180,
