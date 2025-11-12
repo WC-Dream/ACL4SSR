@@ -287,6 +287,13 @@ rule-providers:
     interval: 86400
     url: https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/ssh.list
     path: ./ruleset/ssh.list  
+  ChinaIP: 
+    type: http
+    behavior: classical
+    interval: 86400
+    format: text
+    path: ./ruleset/ChinaIP.list
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list
 rules:
   - "RULE-SET,MyDirect,🎯 全球直连"
   - "GEOIP,LAN,🎯 全球直连,no-resolve"
@@ -306,6 +313,7 @@ rules:
   - "RULE-SET,Proxy,🚀 节点选择"
   - "RULE-SET,AI,🚀 节点选择"
   - "RULE-SET,SpeedTest,🚀 节点选择"
+  - "RULE-SET,ChinaIP,🎯 全球直连"
   - "GEOIP,GOOGLE,🚀 节点选择,no-resolve"
   - "GEOSITE,APPLE,🍎 苹果服务"
   - "GEOSITE,TELEGRAM,🚀 节点选择"

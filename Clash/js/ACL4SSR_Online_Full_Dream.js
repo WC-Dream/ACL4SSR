@@ -457,6 +457,14 @@ async function main(config) {
             path: "./ruleset/ssh.list",
             url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/ssh.list",
         },
+        ChinaIP: {
+            type: "http",
+            behavior: "classical",
+            interval: 86400,
+            format: "text",
+            path: "./ruleset/ChinaIP.list",
+            url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list",
+        },
         // SpeedTest: {
         //     type: "http",
         //     behavior: "domain",
@@ -485,7 +493,7 @@ async function main(config) {
         GlobalMedia: "🌍 国外媒体",
         TikTok: "🌍 国外媒体",  
         Proxy: "🚀 节点选择",
-        
+        ChinaIP: "🎯 全球直连",
         // 其他 provider 可以根据需求继续加
     };
 
