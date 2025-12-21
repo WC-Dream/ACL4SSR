@@ -96,11 +96,11 @@ async function main(config) {
             ]
         },*/
         "nameserver-policy": {
-            "geosite:cn,PRIVATE": [
+            "geosite:cn": [
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
-            "geoip:cn,PRIVATE": [
+            "geoip:cn": [
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ]
