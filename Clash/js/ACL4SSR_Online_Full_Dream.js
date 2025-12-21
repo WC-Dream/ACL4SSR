@@ -41,12 +41,12 @@ async function main(config) {
             "223.5.5.5"
         ],
         "nameserver": [
-            /*"https://doh.pub/dns-query",
+            "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
-            "https://dns.alidns.com/dns-query"*/
-            "https://cloudflare-dns.com/dns-query",
+            "https://dns.alidns.com/dns-query"
+            /*"https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
-            "https://dns.google/dns-query"
+            "https://dns.google/dns-query"*/
         ],
         /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
