@@ -388,16 +388,16 @@ dns:
     - "+.msftncsi.com"
     - "www.msftconnecttest.com"
 
-  fallback-filter:
-    domain:
-      - "+.google.com"
-      - "+.facebook.com"
-      - "+.youtube.com"
-    geoip: true
-    geoip-code: "CN"
-    ipcidr:
-      - "240.0.0.0/4"
-      - "0.0.0.0/32"
+  #fallback-filter:
+  #  domain:
+  #    - "+.google.com"
+  #    - "+.facebook.com"
+  #    - "+.youtube.com"
+  #  geoip: true
+  #  geoip-code: "CN"
+  #  ipcidr:
+  #    - "240.0.0.0/4"
+  #    - "0.0.0.0/32"
 
   nameserver-policy:
     "geosite:cn":
