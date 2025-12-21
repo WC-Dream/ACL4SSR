@@ -82,7 +82,7 @@ async function main(config) {
             "alt7-mtalk.google.com",
             "alt8-mtalk.google.com"
         ],
-        "fallback-filter": {
+        /*"fallback-filter": {
             "domain": [
                 "+.google.com",
                 "+.facebook.com",
@@ -94,7 +94,7 @@ async function main(config) {
                 "240.0.0.0/4",
                 "0.0.0.0/32"
             ]
-        },
+        },*/
         "nameserver-policy": {
             "geosite:cn,PRIVATE": [
                 "https://doh.pub/dns-query",
