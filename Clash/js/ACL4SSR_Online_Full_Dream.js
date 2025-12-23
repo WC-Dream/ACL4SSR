@@ -34,6 +34,7 @@ async function main(config) {
         "prefer-h3": false,
         "use-hosts": true,
         "use-system-hosts": true,
+        "respect-rules": true,
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
         "default-nameserver": [
@@ -41,12 +42,12 @@ async function main(config) {
             "223.5.5.5"
         ],
         "nameserver": [
-            "https://doh.pub/dns-query",
+            /*"https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
-            "https://dns.alidns.com/dns-query"
-            /*"https://cloudflare-dns.com/dns-query",
+            "https://dns.alidns.com/dns-query"*/
+            "https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
-            "https://dns.google/dns-query"*/
+            "https://dns.google/dns-query"
         ],
         /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
@@ -96,11 +97,11 @@ async function main(config) {
             ]
         },*/
         "nameserver-policy": {
-            "geosite:cn": [
+            "geosite:cn,private": [
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
-            "geoip:cn": [
+            "geoip:cn,private": [
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ]
