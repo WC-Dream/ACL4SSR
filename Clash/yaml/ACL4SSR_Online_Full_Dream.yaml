@@ -407,6 +407,9 @@ dns:
     "geoip:cn,private":
       - "https://doh.pub/dns-query"
       - "https://dns.alidns.com/dns-query"
+    "rule-set:MyDirect":
+      - "https://doh.pub/dns-query"
+      - "https://dns.alidns.com/dns-query"  
 
 geodata-mode: true
 geox-url:

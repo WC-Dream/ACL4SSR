@@ -80,7 +80,11 @@ async function main(config) {
             "geoip:cn,private": [
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
-            ]
+            ],
+            "rule-set:MyDirect": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ],
         },
         "fake-ip-filter": [
             "+.lan",
