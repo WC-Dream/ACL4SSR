@@ -59,6 +59,29 @@ async function main(config) {
             "https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
         ],
+        /*"fallback-filter": {
+            "domain": [
+                "+.google.com",
+                "+.facebook.com",
+                "+.youtube.com"
+            ],
+            "geoip": true,
+            "geoip-code": "CN",
+            "ipcidr": [
+                "240.0.0.0/4",
+                "0.0.0.0/32"
+            ]
+        },*/
+        "nameserver-policy": {
+            "geosite:cn,private": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ],
+            "geoip:cn,private": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ]
+        },
         "fake-ip-filter": [
             "+.lan",
             "+.local",
@@ -82,30 +105,7 @@ async function main(config) {
             "alt6-mtalk.google.com",
             "alt7-mtalk.google.com",
             "alt8-mtalk.google.com"
-        ],
-        /*"fallback-filter": {
-            "domain": [
-                "+.google.com",
-                "+.facebook.com",
-                "+.youtube.com"
-            ],
-            "geoip": true,
-            "geoip-code": "CN",
-            "ipcidr": [
-                "240.0.0.0/4",
-                "0.0.0.0/32"
-            ]
-        },*/
-        "nameserver-policy": {
-            "geosite:cn,private": [
-                "https://doh.pub/dns-query",
-                "https://dns.alidns.com/dns-query"
-            ],
-            "geoip:cn,private": [
-                "https://doh.pub/dns-query",
-                "https://dns.alidns.com/dns-query"
-            ]
-        }
+        ]
     };
 
 
@@ -505,6 +505,7 @@ async function main(config) {
     config.rules = [];
 
     config.rules.push("GEOIP,LAN,🎯 全球直连,no-resolve");
+    config.rules.push("RULE-SET,MyDirect,🎯 全球直连");
 
     // 先取出 providerToProxyGroup 的键顺序
     const orderedNames = Object.keys(providerToProxyGroup);
