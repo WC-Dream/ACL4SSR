@@ -28,6 +28,20 @@ async function main(config) {
         ],
     };*/
 
+    config.tun = {
+        enable: true,
+        stack: mixed,
+        "strict-route": false,
+        "auto-route": true,
+        "dns-hijack": [
+            "any:53"
+        ],
+        mtu: 1500,
+        "disable-icmp-forwarding": true,
+        device: "Mihomo",
+        "auto-detect-interface": true
+    }
+
     config.dns = {
         enable: true,
         ipv6: false,
@@ -38,6 +52,7 @@ async function main(config) {
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
         "default-nameserver": [
+            "system",
             "119.29.29.29",
             "223.5.5.5"
         ],
@@ -55,6 +70,7 @@ async function main(config) {
             "https://dns.google/dns-query"
         ],*/
         "proxy-server-nameserver": [
+            "system",
             "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
@@ -74,19 +90,24 @@ async function main(config) {
         },*/
         "nameserver-policy": {
             "geosite:cn,private": [
+                "system",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
             "geoip:cn,private": [
+                "system",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
             "rule-set:MyDirect": [
+                "system",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
         },
         "fake-ip-filter": [
+            "geosite:private",
+            "geosite:cn",
             "+.lan",
             "+.local",
             "+.arpa",
