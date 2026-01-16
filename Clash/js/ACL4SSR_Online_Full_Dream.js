@@ -30,7 +30,7 @@ async function main(config) {
 
     config.tun = {
         enable: true,
-        stack: mixed,
+        stack: "mixed",
         "strict-route": false,
         "auto-route": true,
         "dns-hijack": [
