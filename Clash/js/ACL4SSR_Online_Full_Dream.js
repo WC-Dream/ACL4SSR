@@ -51,18 +51,20 @@ async function main(config) {
         "respect-rules": true,
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
+        rebind: false,
         "default-nameserver": [
             "system",
             "119.29.29.29",
             "223.5.5.5"
         ],
         "nameserver": [
-            /*"https://doh.pub/dns-query",
+            "system",
+            "https://doh.pub/dns-query",
             "https://223.5.5.5/dns-query",
-            "https://dns.alidns.com/dns-query"*/
-            "https://cloudflare-dns.com/dns-query",
+            "https://dns.alidns.com/dns-query"
+            /*"https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
-            "https://dns.google/dns-query"
+            "https://dns.google/dns-query"*/
         ],
         /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
@@ -89,7 +91,11 @@ async function main(config) {
             ]
         },*/
         "nameserver-policy": {
-            "geosite:cn,private": [
+            "geosite:gfw": [
+                "https://cloudflare-dns.com/dns-query",
+                "https://dns.google/dns-query"
+            ],
+            /*"geosite:cn,private": [
                 "system",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
@@ -103,9 +109,10 @@ async function main(config) {
                 "system",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
-            ],
+            ],*/
         },
         "fake-ip-filter": [
+            "geosite:connectivity-check",
             "geosite:private",
             "geosite:cn",
             "+.lan",
@@ -116,8 +123,8 @@ async function main(config) {
             "+.market.xiaomi.com",
             "localhost.ptlogin2.qq.com",
             "+.msftncsi.com",
-            "www.msftconnecttest.com",
-            "mtalk.google.com",
+            "www.msftconnecttest.com"
+            /*"mtalk.google.com",
             "mtalk4.google.com",
             "mtalk-staging.google.com",
             "mtalk-dev.google.com",
@@ -129,7 +136,7 @@ async function main(config) {
             "alt5-mtalk.google.com",
             "alt6-mtalk.google.com",
             "alt7-mtalk.google.com",
-            "alt8-mtalk.google.com"
+            "alt8-mtalk.google.com"*/
         ]
     };
 
@@ -494,6 +501,30 @@ async function main(config) {
             path: "./ruleset/ChinaIP.list",
             url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list",
         },
+        MoeGlobal: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://ruleset.skk.moe/List/non_ip/global.conf",
+            path: "./ruleset/MoeGlobal.txt",
+        },
+        MoeChina: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://ruleset.skk.moe/List/non_ip/domestic.conf",
+            path: "./ruleset/MoeChina.txt",
+        },
+        MoeChinaIP: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://ruleset.skk.moe/List/ip/china_ip.conf",
+            path: "./ruleset/MoeChinaIP.txt",
+        }
         // SpeedTest: {
         //     type: "http",
         //     behavior: "domain",
@@ -522,6 +553,9 @@ async function main(config) {
         GlobalMedia: "🌍 国外媒体",
         TikTok: "🌍 国外媒体",  
         Proxy: "🚀 节点选择",
+        MoeGlobal: "🚀 节点选择",
+        MoeChina: "🎯 全球直连",
+        MoeChinaIP: "🎯 全球直连",
         ChinaIP: "🎯 全球直连",
         // 其他 provider 可以根据需求继续加
     };
