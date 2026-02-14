@@ -52,15 +52,13 @@ async function main(config) {
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
         rebind: false,
-        "default-nameserver": [
-            "system",
+        "default-nameserver": [       
             "119.29.29.29",
             "223.5.5.5"
         ],
         "nameserver": [
-            "system",
             "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query",
+            //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
             /*"https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
@@ -72,9 +70,8 @@ async function main(config) {
             "https://dns.google/dns-query"
         ],*/
         "proxy-server-nameserver": [
-            "system",
             "https://doh.pub/dns-query",
-            "https://223.5.5.5/dns-query",
+            //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
         ],
         /*"fallback-filter": {
