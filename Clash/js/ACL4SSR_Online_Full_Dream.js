@@ -105,7 +105,7 @@ async function main(config) {
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
         rebind: false,
-        "default-nameserver": [       
+        "default-nameserver": [
             "119.29.29.29",
             "223.5.5.5"
         ],
@@ -385,7 +385,7 @@ async function main(config) {
             name: "🇺🇲 美国自动",
             "include-all": true,
             //filter:"(?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California",
-            filter:"(?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|USA|UnitedStates|United States|America|California)",
+            filter: "(?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|USA|UnitedStates|United States|America|California)",
             type: "url-test",
             url: "https://cp.cloudflare.com",
             interval: 180,
@@ -586,7 +586,7 @@ async function main(config) {
         // ... 这里省略你的全部其他 rule-providers 定义
     });
 
-    const providerToProxyGroup = {
+    const providerToProxyGroup_back = {
         MyDirect: "🎯 全球直连",
         MyProxy: "🚀 节点选择",
         FCM: "📢 谷歌FCM",
@@ -598,10 +598,10 @@ async function main(config) {
         Sony: "🎮 游戏平台",
         Steam: "🎮 游戏平台",
         MySteam: "🎮 游戏平台",
-        AI: "🚀 节点选择",      
+        AI: "🚀 节点选择",
         SpeedTest: "🚀 节点选择",
         GlobalMedia: "🌍 国外媒体",
-        TikTok: "🌍 国外媒体",  
+        TikTok: "🌍 国外媒体",
         Proxy: "🚀 节点选择",
         MoeGlobal: "🚀 节点选择",
         MoeChina: "🎯 全球直连",
@@ -610,125 +610,110 @@ async function main(config) {
         // 其他 provider 可以根据需求继续加
     };
 
+    const providerToProxyGroup = [
+
+        { type: "rule", value: "GEOIP,LAN,🎯 全球直连,no-resolve" },
+        { type: "rule", value: "RULE-SET,MyDirect,🎯 全球直连" },
+        { type: "rule", value: "GEOSITE,PRIVATE,🎯 全球直连" },
+        { type: "rule", value: "GEOIP,PRIVATE,🎯 全球直连,no-resolve" },
+
+        // 自己的
+        { type: "provider", name: "MyDirect", group: "🎯 全球直连" },
+        { type: "provider", name: "MyProxy", group: "🚀 节点选择" },
+
+        // 更细的规则
+        { type: "provider", name: "SSH", group: "🔑 RemoteSSH" },
+        { type: "provider", name: "FCM", group: "📢 谷歌FCM" },
+        { type: "provider", name: "GoogleFCM", group: "📢 谷歌FCM" },
+        { type: "provider", name: "Onedrive", group: "Ⓜ️ 微软云盘" },
+        { type: "provider", name: "Microsoft", group: "Ⓜ️ 微软服务" },
+        { type: "rule", value: "GEOSITE,APPLE,🍎 苹果服务" },
+        { type: "provider", name: "Epic", group: "🎮 游戏平台" },
+        { type: "provider", name: "Sony", group: "🎮 游戏平台" },
+        { type: "provider", name: "Steam", group: "🎮 游戏平台" },
+        { type: "provider", name: "MySteam", group: "🎮 游戏平台" },
+        { type: "provider", name: "AI", group: "🚀 节点选择" },
+        { type: "provider", name: "TikTok", group: "🌍 国外媒体" },
+        { type: "rule", value: "GEOIP,NETFLIX,🌍 国外媒体,no-resolve" },
+        { type: "provider", name: "GlobalMedia", group: "🌍 国外媒体" },
+        { type: "rule", value: "GEOIP,GOOGLE,🚀 节点选择,no-resolve" },
+        { type: "rule", value: "GEOSITE,TELEGRAM,🚀 节点选择" },
+        { type: "rule", value: "GEOIP,TELEGRAM,🚀 节点选择,no-resolve" },
+
+        // 大的
+        { type: "provider", name: "Proxy", group: "🚀 节点选择" },
+        { type: "rule", value: "GEOSITE,gfw,🚀 节点选择" },
+        { type: "rule", value: "GEOSITE,CN,🎯 全球直连" },
+        { type: "rule", value: "GEOIP,CN,🎯 全球直连,no-resolve" },
+        { type: "provider", name: "MoeChina", group: "🎯 全球直连" },
+        { type: "provider", name: "MoeChinaIP", group: "🎯 全球直连" },
+        { type: "provider", name: "ChinaIP", group: "🎯 全球直连" },
+
+        //兜底
+        { type: "rule", value: "MATCH,🚀 节点选择" },
+
+    ];
+
+
     // 新的 rules 数组
     config.rules = [];
 
-    config.rules.push("GEOIP,LAN,🎯 全球直连,no-resolve");
-    config.rules.push("RULE-SET,MyDirect,🎯 全球直连");
+    for (const item of providerToProxyGroup) {
 
-    // 先取出 providerToProxyGroup 的键顺序
-    const orderedNames = Object.keys(providerToProxyGroup);
+        // ✅ 1) inline rule：原样 push，不 fetch 不解析
+        if (item.type === "rule") {
+            config.rules.push(item.value);
+            continue;
+        }
 
-    // 遍历时按这个顺序来
-    for (const name of orderedNames) {
+        // ✅ 2) provider：fetch + 解析 + 自动补代理组
+        if (item.type === "provider") {
 
-        const provider = config["rule-providers"][name];
-        if (!provider || !provider.url) continue;
+            const name = item.name;
+            const provider = config["rule-providers"][name];
+            if (!provider || !provider.url) continue;
 
-        // 每个请求之间延迟
-        ;await jitterDelay(200, 500);
+            // 每个请求之间延迟
+            await jitterDelay(200, 500);
 
-        try {
-            const text = await fetchWithRetry(provider.url, 3);
+            try {
+                const text = await fetchWithRetry(provider.url, 3);
 
-            const lines = text
-                .split("\n")
-                .map(l => l.trim())
-                .filter(l => l && !l.startsWith("#"));
+                const lines = text
+                    .split("\n")
+                    .map(l => l.trim())
+                    .filter(l => l && !l.startsWith("#"));
 
-            const proxyGroup = providerToProxyGroup[name] || "🚀 节点选择";
+                const proxyGroup = item.group || "🚀 节点选择";
 
-            for (const rule of lines) {
-                if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) continue;
-                if (rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")) continue;
+                for (const rule of lines) {
+                    if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) continue;
+                    if (rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")) continue;
 
-                if (rule.includes(",")) {
-                    const parts = rule.split(",");
-                    const lastPart = parts[parts.length - 1];
+                    if (rule.includes(",")) {
+                        const parts = rule.split(",");
+                        const lastPart = parts[parts.length - 1];
 
-                    if (lastPart === proxyGroup) {
-                        config.rules.push(rule);
-                    } else if (rule.endsWith(",no-resolve")) {
-                        const withoutNoResolve = rule.slice(0, -",no-resolve".length);
-                        config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
+                        if (lastPart === proxyGroup) {
+                            config.rules.push(rule);
+                        } else if (rule.endsWith(",no-resolve")) {
+                            const withoutNoResolve = rule.slice(0, -",no-resolve".length);
+                            config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
+                        } else {
+                            config.rules.push(`${rule},${proxyGroup}`);
+                        }
                     } else {
                         config.rules.push(`${rule},${proxyGroup}`);
                     }
-                } else {
-                    config.rules.push(`${rule},${proxyGroup}`);
                 }
+            } catch (e) {
+                console.log(`获取规则失败(已重试): ${name}`, e);
             }
 
-        } catch (e) {
-            console.log(`获取规则失败(已重试): ${name}`, e);
+            continue;
         }
     }
 
-
-    //老的，生成的顺序不对，注释
-    /*
-    // 遍历 rule-providers，获取内容并解析
-    for (const [name, provider] of Object.entries(config["rule-providers"])) {
-        try {
-            const res = await fetch(provider.url);
-            const text = await res.text();
-
-            const lines = text
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line && !line.startsWith('#'));
-
-            const proxyGroup = providerToProxyGroup[name] || "🚀 节点选择"; // 默认代理组
-
-            for (const rule of lines) {
-                if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) {
-                    // 跳过 USER-AGENT 开头的规则
-                    continue;
-                }
-
-                if (
-                    rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")
-                ) {
-                    // 跳过 USER-AGENT 开头的规则 和 包含特定字符串的规则
-                    continue;
-                }
-
-                if (rule.includes(",")) {
-                    const parts = rule.split(",");
-                    const lastPart = parts[parts.length - 1];
-
-                    if (lastPart === proxyGroup) {
-                        config.rules.push(rule);
-                    } else if (rule.endsWith(",no-resolve")) {
-                        const withoutNoResolve = rule.slice(0, -",no-resolve".length);
-                        config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
-                    } else {
-                        config.rules.push(`${rule},${proxyGroup}`);
-                    }
-                } else {
-                    config.rules.push(`${rule},${proxyGroup}`);
-                }
-            }
-        } catch (e) {
-            console.log(`获取规则失败: ${name}`, e);
-        }
-    }
-    */
-
-
-    config.rules.push("GEOIP,NETFLIX,🌍 国外媒体,no-resolve");
-    config.rules.push("GEOIP,GOOGLE,🚀 节点选择,no-resolve");
-    config.rules.push("GEOSITE,APPLE,🍎 苹果服务");
-    config.rules.push("GEOSITE,TELEGRAM,🚀 节点选择");
-    config.rules.push("GEOIP,TELEGRAM,🚀 节点选择,no-resolve");
-    config.rules.push("GEOSITE,gfw,🚀 节点选择");
-    config.rules.push("GEOSITE,CN,🎯 全球直连");
-    config.rules.push("GEOSITE,PRIVATE,🎯 全球直连");
-    config.rules.push("GEOIP,PRIVATE,🎯 全球直连,no-resolve");
-    config.rules.push("GEOIP,CN,🎯 全球直连,no-resolve");
-
-    // 确保最后有 MATCH 规则
-    config.rules.push("MATCH,🚀 节点选择");
 
 
     config["geodata-mode"] = true;
