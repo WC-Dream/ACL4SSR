@@ -1,56 +1,3 @@
-// 随机延迟
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-async function jitterDelay(min = 200, max = 500) {
-    await sleep(randInt(min, max));
-}
-
-// 判断 HTML
-function looksLikeHtml(text) {
-    if (!text) return false;
-    const t = text.trim().toLowerCase();
-    if (t.startsWith("<!doctype html") || t.startsWith("<html") || t.includes("<head") || t.includes("<body")) return true;
-    if (t.includes("</html>")) return true;
-    return false;
-}
-
-// fetch 重试
-async function fetchWithRetry(url, maxRetries = 3) {
-    let lastErr;
-
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        try {
-            const res = await fetch(url, { cache: "no-store" });
-
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
-            }
-
-            const text = await res.text();
-
-            if (looksLikeHtml(text)) {
-                throw new Error("HTML response");
-            }
-
-            return text;
-        } catch (e) {
-            lastErr = e;
-            if (attempt < maxRetries) {
-                await jitterDelay(200, 500);
-                continue;
-            }
-        }
-    }
-
-    throw lastErr;
-}
-
-
-
 async function main(config) {
 
     //config["disable-keep-alive"] = false;
@@ -621,15 +568,12 @@ async function main(config) {
 
     // 遍历时按这个顺序来
     for (const name of orderedNames) {
-
         const provider = config["rule-providers"][name];
-        if (!provider || !provider.url) continue;
-
-        // 每个请求之间延迟
-        ;await jitterDelay(200, 500);
+        if (!provider) continue;
 
         try {
-            const text = await fetchWithRetry(provider.url, 3);
+            const res = await fetch(provider.url);
+            const text = await res.text();
 
             const lines = text
                 .split("\n")
@@ -658,12 +602,10 @@ async function main(config) {
                     config.rules.push(`${rule},${proxyGroup}`);
                 }
             }
-
         } catch (e) {
-            console.log(`获取规则失败(已重试): ${name}`, e);
+            console.log(`获取规则失败: ${name}`, e);
         }
     }
-
 
     //老的，生成的顺序不对，注释
     /*
