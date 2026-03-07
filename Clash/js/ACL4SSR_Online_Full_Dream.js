@@ -89,7 +89,7 @@ async function main(config) {
         "dns-hijack": [
             "any:53"
         ],
-        mtu: 1280,
+        mtu: 1480,
         "disable-icmp-forwarding": true,
         device: "Mihomo",
         "auto-detect-interface": true
