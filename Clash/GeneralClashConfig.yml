@@ -92,7 +92,10 @@ dns:
     #- https://dns.google/dns-query
     #- https://public.dns.iij.jp/dns-query
   nameserver-policy:
-    'geosite: gfw':
+    'geosite:cn':
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    'geosite:geolocation-!cn':
       - https://dns.cloudflare.com/dns-query
       - https://dns.google/dns-query
     

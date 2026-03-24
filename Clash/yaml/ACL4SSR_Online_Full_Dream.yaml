@@ -392,7 +392,7 @@ dns:
 
   fake-ip-filter:
     - "geosite:private"
-    - "geosite:cn"
+    #- "geosite:cn"
     - "+.lan"
     - "+.local"
     - "+.arpa"
@@ -415,9 +415,15 @@ dns:
   #    - "0.0.0.0/32"
 
   nameserver-policy:
-    "geosite:gfw":
+    "geosite:cn":
+      - "https://doh.pub/dns-query"
+      - "https://dns.alidns.com/dns-query"
+    "geosite:geolocation-!cn":
       - "https://cloudflare-dns.com/dns-query"
       - "https://dns.google/dns-query"
+    #"geosite:gfw":
+     # - "https://cloudflare-dns.com/dns-query"
+      #- "https://dns.google/dns-query"
     #"geosite:cn,private":
     #  - "https://doh.pub/dns-query"
     #  - "https://dns.alidns.com/dns-query"

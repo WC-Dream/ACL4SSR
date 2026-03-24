@@ -141,10 +141,19 @@ async function main(config) {
             ]
         },*/
         "nameserver-policy": {
-            "geosite:gfw": [
+            "geosite:cn": [
+                "https://doh.pub/dns-query",
+                "https://dns.alidns.com/dns-query"
+            ],
+            "geosite:geolocation-!cn": [
                 "https://cloudflare-dns.com/dns-query",
                 "https://dns.google/dns-query"
             ],
+
+            /*"geosite:gfw": [
+                "https://cloudflare-dns.com/dns-query",
+                "https://dns.google/dns-query"
+            ],*/
             /*"geosite:cn,private": [
                 "system",
                 "https://doh.pub/dns-query",
@@ -164,7 +173,7 @@ async function main(config) {
         "fake-ip-filter": [
             "geosite:connectivity-check",
             "geosite:private",
-            "geosite:cn",
+            //"geosite:cn",
             "+.lan",
             "+.local",
             "+.arpa",
