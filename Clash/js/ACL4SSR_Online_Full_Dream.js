@@ -83,13 +83,13 @@ async function main(config) {
 
     config.tun = {
         enable: true,
-        stack: "mixed",
+        stack: "system",
         "strict-route": false,
         "auto-route": true,
         "dns-hijack": [
             "any:53"
         ],
-        mtu: 1480,
+        mtu: 1500,
         "disable-icmp-forwarding": true,
         device: "Mihomo",
         "auto-detect-interface": true
@@ -182,8 +182,8 @@ async function main(config) {
             "+.market.xiaomi.com",
             "localhost.ptlogin2.qq.com",
             "+.msftncsi.com",
-            "www.msftconnecttest.com"
-            /*"mtalk.google.com",
+            "www.msftconnecttest.com",
+            "mtalk.google.com",
             "mtalk4.google.com",
             "mtalk-staging.google.com",
             "mtalk-dev.google.com",
@@ -195,7 +195,7 @@ async function main(config) {
             "alt5-mtalk.google.com",
             "alt6-mtalk.google.com",
             "alt7-mtalk.google.com",
-            "alt8-mtalk.google.com"*/
+            "alt8-mtalk.google.com"
         ]
     };
 

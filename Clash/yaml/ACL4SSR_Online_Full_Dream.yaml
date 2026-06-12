@@ -354,12 +354,12 @@ rules:
 #    - +.push.apple.com
 tun:
   enable: true
-  stack: mixed
+  stack: system
   strict-route: false
   auto-route: true
   dns-hijack: 
     - any:53
-  mtu: 1480
+  mtu: 1500
   disable-icmp-forwarding: true
   device: Mihomo
   auto-detect-interface: true
