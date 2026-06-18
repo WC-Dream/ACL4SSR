@@ -20,6 +20,8 @@ proxy-groups:
     interval: 300
     tolerance: 200
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
 
   - name: 🌍 国外媒体
     type: select
@@ -140,6 +142,8 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
   - name: 🇨🇳 台湾自动
     include-all: true
     filter: (?i)台|新北|彰化|TW|Taiwan
@@ -148,6 +152,8 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
   - name: 🇺🇲 美国自动
     include-all: true
     filter: (?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|USA|UnitedStates|United States|America|California)
@@ -156,6 +162,8 @@ proxy-groups:
     interval: 300
     tolerance: 250
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
   - name: 🇯🇵 日本自动
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
@@ -164,6 +172,8 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
   - name: 🇸🇬 狮城自动
     include-all: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
@@ -172,6 +182,8 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
+    timeout: 5000
+    max-failed-times: 5
 
 rule-providers:
   FCM:

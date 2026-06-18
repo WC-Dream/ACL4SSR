@@ -231,6 +231,8 @@ async function main(config) {
             interval: 300,
             tolerance: 200,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         },
         {
             name: "🌍 国外媒体",
@@ -379,6 +381,8 @@ async function main(config) {
             interval: 300,
             tolerance: 150,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         },
         {
             name: "🇨🇳 台湾自动",
@@ -389,6 +393,8 @@ async function main(config) {
             interval: 300,
             tolerance: 150,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         },
         {
             name: "🇺🇲 美国自动",
@@ -400,6 +406,8 @@ async function main(config) {
             interval: 300,
             tolerance: 250,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         },
         {
             name: "🇯🇵 日本自动",
@@ -410,6 +418,8 @@ async function main(config) {
             interval: 300,
             tolerance: 150,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         },
         {
             name: "🇸🇬 狮城自动",
@@ -420,6 +430,8 @@ async function main(config) {
             interval: 300,
             tolerance: 150,
             lazy: true,
+            timeout: 5000,
+            "max-failed-times": 5
         }
     ];
     // 赋值给 config["proxy-groups"]
