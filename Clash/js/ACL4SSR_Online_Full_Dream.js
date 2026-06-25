@@ -58,7 +58,7 @@ async function main(config) {
     //config["keep-alive-interval"] = 45;
     //config["tcp-concurrent"] = true;
 
-    /*
+
     config.sniffer = {
         sniff: {
             TLS: {
@@ -66,20 +66,71 @@ async function main(config) {
             },
             HTTP: {
                 ports: [80, 8080, 8880],
-            },
+            }
+            /*,
             QUIC: {
                 ports: [443, 8443],
-            },
+            },*/
         },
         "override-destination": false,
         enable: true,
+        "parse-pure-ip": false,
         "force-dns-mapping": true,
         "skip-domain": [
             "Mijia Cloud",
             "dlg.io.mi.com",
-            "+.push.apple.com"
+            "+.push.apple.com",
+            "+.lan",
+            "+.local",
+            "+.home",
+            "+.arpa",
+            "localhost",
+            "time.*.com",
+            "ntp.*.com",
+            "stun.*.*",
+            "stun.*",
+            "+.market.xiaomi.com",
+            "localhost.ptlogin2.qq.com",
+            "+.msftncsi.com",
+            "www.msftconnecttest.com",
+            "mtalk.google.com",
+            "mtalk4.google.com",
+            "mtalk-staging.google.com",
+            "mtalk-dev.google.com",
+            "alt1-mtalk.google.com",
+            "alt1-mtalk.google.com",
+            "alt2-mtalk.google.com",
+            "alt3-mtalk.google.com",
+            "alt4-mtalk.google.com",
+            "alt5-mtalk.google.com",
+            "alt6-mtalk.google.com",
+            "alt7-mtalk.google.com",
+            "alt8-mtalk.google.com"
         ],
-    };*/
+        "skip-dst-address": [
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "127.0.0.0/8",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.168.0.0/16",
+            "224.0.0.0/4",
+            "240.0.0.0/4",
+        ],
+
+        "skip-src-address": [
+            "0.0.0.0/8",
+            "10.0.0.0/8",
+            "100.64.0.0/10",
+            "127.0.0.0/8",
+            "169.254.0.0/16",
+            "172.16.0.0/12",
+            "192.168.0.0/16",
+            "224.0.0.0/4",
+            "240.0.0.0/4",
+        ],
+    };
 
     config.tun = {
         enable: true,
@@ -176,9 +227,13 @@ async function main(config) {
             //"geosite:cn",
             "+.lan",
             "+.local",
+            "+.home",
             "+.arpa",
+            "localhost",
             "time.*.com",
             "ntp.*.com",
+            "stun.*.*",
+            "stun.*",
             "+.market.xiaomi.com",
             "localhost.ptlogin2.qq.com",
             "+.msftncsi.com",
@@ -345,15 +400,7 @@ async function main(config) {
             name: "🎯 全球直连",
             type: "select",
             proxies: [
-                "DIRECT",
-                "🚀 节点选择",
-                "♻️ 自动选择",
-                "🚀 手动切换1",
-                "🇺🇲 美国自动",
-                "🇭🇰 香港自动",
-                "🇨🇳 台湾自动",
-                "🇸🇬 狮城自动",
-                "🇯🇵 日本自动",
+                "DIRECT"
             ],
         },
         {
@@ -612,7 +659,7 @@ async function main(config) {
         MyProxy: "🚀 节点选择",
         FCM: "📢 谷歌FCM",
         GoogleFCM: "📢 谷歌FCM",
-        SSH: "🔑 RemoteSSH",
+        //SSH: "🔑 RemoteSSH",
         Onedrive: "Ⓜ️ 微软云盘",
         Microsoft: "Ⓜ️ 微软服务",
         Epic: "🎮 游戏平台",
@@ -634,7 +681,7 @@ async function main(config) {
     const providerToProxyGroup = [
 
         { type: "rule", value: "GEOIP,LAN,🎯 全球直连,no-resolve" },
-        { type: "rule", value: "RULE-SET,MyDirect,🎯 全球直连" },
+        //{ type: "rule", value: "RULE-SET,MyDirect,🎯 全球直连" },
         { type: "rule", value: "GEOSITE,PRIVATE,🎯 全球直连" },
         { type: "rule", value: "GEOIP,PRIVATE,🎯 全球直连,no-resolve" },
 
@@ -643,7 +690,7 @@ async function main(config) {
         { type: "provider", name: "MyProxy", group: "🚀 节点选择" },
 
         // 更细的规则
-        { type: "provider", name: "SSH", group: "🔑 RemoteSSH" },
+        //{ type: "provider", name: "SSH", group: "🔑 RemoteSSH" },
         { type: "provider", name: "FCM", group: "📢 谷歌FCM" },
         { type: "provider", name: "GoogleFCM", group: "📢 谷歌FCM" },
         { type: "provider", name: "Onedrive", group: "Ⓜ️ 微软云盘" },
@@ -667,8 +714,8 @@ async function main(config) {
         { type: "rule", value: "GEOSITE,CN,🎯 全球直连" },
         { type: "rule", value: "GEOIP,CN,🎯 全球直连,no-resolve" },
         { type: "provider", name: "MoeChina", group: "🎯 全球直连" },
-        { type: "provider", name: "MoeChinaIP", group: "🎯 全球直连" },
-        { type: "provider", name: "ChinaIP", group: "🎯 全球直连" },
+        { type: "provider", name: "MoeChinaIP", group: "🎯 全球直连", noResolve: true },
+        { type: "provider", name: "ChinaIP", group: "🎯 全球直连", noResolve: true },
 
         //兜底
         { type: "rule", value: "MATCH,🚀 节点选择" },
@@ -689,12 +736,10 @@ async function main(config) {
 
         // ✅ 2) provider：fetch + 解析 + 自动补代理组
         if (item.type === "provider") {
-
             const name = item.name;
             const provider = config["rule-providers"][name];
             if (!provider || !provider.url) continue;
 
-            // 每个请求之间延迟
             await jitterDelay(200, 500);
 
             try {
@@ -706,26 +751,58 @@ async function main(config) {
                     .filter(l => l && !l.startsWith("#"));
 
                 const proxyGroup = item.group || "🚀 节点选择";
+                const forceNoResolve = item.noResolve === true;
 
-                for (const rule of lines) {
+                const ruleTypesNeedPolicy = new Set([
+                    "DOMAIN",
+                    "DOMAIN-SUFFIX",
+                    "DOMAIN-KEYWORD",
+                    "DOMAIN-REGEX",
+                    "IP-CIDR",
+                    "IP-CIDR6",
+                    "IP-ASN",
+                    "GEOIP",
+                    "GEOSITE",
+                    "SRC-IP-CIDR",
+                    "DST-PORT",
+                    "SRC-PORT",
+                    "PROCESS-NAME",
+                    "PROCESS-PATH",
+                    "PROCESS-PATH-REGEX",
+                ]);
+
+                for (const rawRule of lines) {
+                    let rule = rawRule.trim();
+
+                    if (!rule) continue;
+                    if (rule.startsWith("#")) continue;
                     if (rule.startsWith("USER-AGENT") || rule.startsWith("URL-REGEX")) continue;
                     if (rule.includes("7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe")) continue;
 
-                    if (rule.includes(",")) {
-                        const parts = rule.split(",");
-                        const lastPart = parts[parts.length - 1];
-
-                        if (lastPart === proxyGroup) {
-                            config.rules.push(rule);
-                        } else if (rule.endsWith(",no-resolve")) {
-                            const withoutNoResolve = rule.slice(0, -",no-resolve".length);
-                            config.rules.push(`${withoutNoResolve},${proxyGroup},no-resolve`);
-                        } else {
-                            config.rules.push(`${rule},${proxyGroup}`);
-                        }
-                    } else {
-                        config.rules.push(`${rule},${proxyGroup}`);
+                    const hasNoResolve = rule.endsWith(",no-resolve");
+                    if (hasNoResolve) {
+                        rule = rule.slice(0, -",no-resolve".length);
                     }
+
+                    const parts = rule.split(",").map(s => s.trim());
+                    const ruleType = parts[0];
+                    const needNoResolve = hasNoResolve || forceNoResolve;
+
+                    // 只处理 Mihomo 规则；非规则行跳过
+                    if (!ruleTypesNeedPolicy.has(ruleType)) continue;
+
+                    // 如果已经是三段及以上，认为最后一段可能是原策略组，替换成你的 proxyGroup
+                    // 例如 DOMAIN-SUFFIX,example.com,DIRECT => DOMAIN-SUFFIX,example.com,🚀 节点选择
+                    let baseRule;
+                    if (parts.length >= 3) {
+                        baseRule = parts.slice(0, -1).join(",");
+                    } else {
+                        baseRule = parts.join(",");
+                    }
+
+                    config.rules.push(
+                        `${baseRule},${proxyGroup}${needNoResolve ? ",no-resolve" : ""}`
+                    );
                 }
             } catch (e) {
                 console.log(`获取规则失败(已重试): ${name}`, e);
