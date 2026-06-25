@@ -827,17 +827,24 @@ async function main(config) {
     return config;
 }
 
-async function operator() {
-    const raw = typeof $content !== "undefined" && $content
-        ? $content
-        : (typeof $files !== "undefined" && $files?.[0] ? $files[0] : "");
-
+async function processFileContent(raw) {
     const config = ProxyUtils.yaml.safeLoad(raw);
     if (!config || typeof config !== "object") {
         throw new Error("Invalid Mihomo config content");
     }
 
     const processed = await main(config);
-    $content = ProxyUtils.yaml.safeDump(processed);
-    return $content;
+    return ProxyUtils.yaml.safeDump(processed);
+}
+
+async function operator(content) {
+    const raw = content
+        ?? (typeof $content !== "undefined" && $content ? $content : undefined)
+        ?? (typeof $files !== "undefined" && $files?.[0] ? $files[0] : "");
+
+    const output = await processFileContent(raw);
+    if (typeof $content !== "undefined") {
+        $content = output;
+    }
+    return output;
 }
