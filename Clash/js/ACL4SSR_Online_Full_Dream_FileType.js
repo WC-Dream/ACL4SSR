@@ -837,14 +837,55 @@ async function processFileContent(raw) {
     return ProxyUtils.yaml.safeDump(processed);
 }
 
-async function operator(content) {
-    const raw = content
-        ?? (typeof $content !== "undefined" && $content ? $content : undefined)
-        ?? (typeof $files !== "undefined" && $files?.[0] ? $files[0] : "");
+function extractText(value) {
+    if (typeof value === "string") {
+        return value;
+    }
 
+    if (value instanceof Uint8Array) {
+        return new TextDecoder().decode(value);
+    }
+
+    if (value instanceof ArrayBuffer) {
+        return new TextDecoder().decode(new Uint8Array(value));
+    }
+
+    if (value && typeof value === "object") {
+        return extractText(value.content ?? value.body ?? value.data ?? value.value ?? "");
+    }
+
+    return "";
+}
+
+function readFileInput(content) {
+    const direct = extractText(content);
+    if (direct.trim()) return direct;
+
+    if (typeof $content !== "undefined") {
+        const fromContent = extractText($content);
+        if (fromContent.trim()) return fromContent;
+    }
+
+    if (typeof $files !== "undefined") {
+        const files = Array.isArray($files) ? $files : [$files];
+        for (const file of files) {
+            const fromFile = extractText(file);
+            if (fromFile.trim()) return fromFile;
+        }
+    }
+
+    throw new Error("No file content found");
+}
+
+async function operator(content) {
+    const raw = readFileInput(content);
     const output = await processFileContent(raw);
     if (typeof $content !== "undefined") {
         $content = output;
     }
     return output;
+}
+
+if (typeof $content !== "undefined" || typeof $files !== "undefined") {
+    $content = await operator();
 }
