@@ -146,6 +146,13 @@ async function main(config) {
         "auto-detect-interface": true
     }
 
+    //读取原片段，没有的指定
+    const proxyServerNameserver = config.dns?.["proxy-server-nameserver"] ?? [
+        "https://doh.pub/dns-query",
+        //"https://223.5.5.5/dns-query",
+        "https://dns.alidns.com/dns-query"
+    ];
+
     config.dns = {
         enable: true,
         ipv6: false,
@@ -173,11 +180,12 @@ async function main(config) {
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"
         ],*/
-        "proxy-server-nameserver": [
+        "proxy-server-nameserver": proxyServerNameserver,
+        /*[
             "https://doh.pub/dns-query",
             //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
-        ],
+        ],*/
         /*"fallback-filter": {
             "domain": [
                 "+.google.com",
