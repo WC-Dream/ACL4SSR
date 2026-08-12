@@ -284,12 +284,13 @@ async function main(config) {
             name: "♻️ 自动选择",
             "include-all": true,
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 200,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         },
         {
             name: "🌍 国外媒体",
@@ -426,24 +427,26 @@ async function main(config) {
             "include-all": true,
             filter: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong",
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         },
         {
             name: "🇨🇳 台湾自动",
             "include-all": true,
             filter: "(?i)台|新北|彰化|TW|Taiwan",
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         },
         {
             name: "🇺🇲 美国自动",
@@ -451,36 +454,39 @@ async function main(config) {
             //filter:"(?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|America|California",
             filter: "(?i)(?:美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(?<![A-Za-z])US(?:(?=\s*x\d)|(?![A-Za-z]))|USA|UnitedStates|United States|America|California)",
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 250,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         },
         {
             name: "🇯🇵 日本自动",
             "include-all": true,
             filter: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan",
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         },
         {
             name: "🇸🇬 狮城自动",
             "include-all": true,
             filter: "(?i)新加坡|坡|狮城|SG|Singapore",
             type: "url-test",
-            url: "https://www.gstatic.com/generate_204",
+            url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5
+            "max-failed-times": 5,
+            retry: 3
         }
     ];
     // 赋值给 config["proxy-groups"]
