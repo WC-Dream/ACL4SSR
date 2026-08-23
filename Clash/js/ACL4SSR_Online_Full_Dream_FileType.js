@@ -73,7 +73,7 @@ async function main(config) {
             },*/
         },
         "override-destination": false,
-        enable: true,
+        enable: false,
         "parse-pure-ip": false,
         "force-dns-mapping": true,
         "skip-domain": [
@@ -152,6 +152,9 @@ async function main(config) {
         "https://dns.alidns.com/dns-query"
     ];
 
+    // 原配置存在 proxy-server-nameserver-policy 就原样保留
+    const proxyServerNameserverPolicy = config.dns?.["proxy-server-nameserver-policy"];
+
     config.dns = {
         enable: true,
         ipv6: false,
@@ -180,6 +183,9 @@ async function main(config) {
             "https://dns.google/dns-query"
         ],*/
         "proxy-server-nameserver": proxyServerNameserver,
+
+        ...(proxyServerNameserverPolicy !== undefined ? { "proxy-server-nameserver-policy": proxyServerNameserverPolicy } : {}),
+
         /*"fallback-filter": {
             "domain": [
                 "+.google.com",

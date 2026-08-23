@@ -352,7 +352,7 @@ rules:
 
 
 sniffer:
-  enable: true
+  enable: false
   override-destination: false
   parse-pure-ip: false
   force-dns-mapping: true

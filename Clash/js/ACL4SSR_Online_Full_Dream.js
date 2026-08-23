@@ -73,7 +73,7 @@ async function main(config) {
             },*/
         },
         "override-destination": false,
-        enable: true,
+        enable: false,
         "parse-pure-ip": false,
         "force-dns-mapping": true,
         "skip-domain": [
