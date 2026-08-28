@@ -18,35 +18,65 @@ function looksLikeHtml(text) {
     return false;
 }
 
-// fetch 重试
-async function fetchWithRetry(url, maxRetries = 3) {
-    let lastErr;
+// 带超时和重试的规则下载
+async function fetchWithRetry(url, maxAttempts = 3, timeoutMs = 12000) {
+    let lastError;
 
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+
         try {
-            const res = await fetch(url, { cache: "no-store" });
+            const response = await fetch(url, {
+                cache: "no-store",
+                signal: controller.signal,
+            });
 
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status}`);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status} ${response.statusText || ""}`.trim());
             }
 
-            const text = await res.text();
+            const text = await response.text();
+
+            if (!text || !text.trim()) {
+                throw new Error("响应内容为空");
+            }
 
             if (looksLikeHtml(text)) {
-                throw new Error("HTML response");
+                throw new Error("返回了 HTML，可能是拦截页或错误页");
             }
 
             return text;
-        } catch (e) {
-            lastErr = e;
-            if (attempt < maxRetries) {
-                await jitterDelay(200, 500);
-                continue;
+        } catch (error) {
+            if (error?.name === "AbortError") {
+                lastError = new Error(`请求超时：${timeoutMs}ms`);
+            } else {
+                lastError = error instanceof Error
+                    ? error
+                    : new Error(String(error));
             }
+
+            console.log(
+                `规则下载失败 [${attempt}/${maxAttempts}]：${url}`,
+                lastError.message
+            );
+
+            if (attempt < maxAttempts) {
+                // 约 1 秒、2 秒递增，并加入少量随机抖动
+                const backoffMs =
+                    Math.min(1000 * (2 ** (attempt - 1)), 4000) +
+                    randInt(100, 500);
+
+                await sleep(backoffMs);
+            }
+        } finally {
+            clearTimeout(timer);
         }
     }
 
-    throw lastErr;
+    throw new Error(
+        `规则下载最终失败：${url}；原因：${lastError?.message || "未知错误"}`
+    );
 }
 
 
@@ -170,12 +200,19 @@ async function main(config) {
             "223.5.5.5"
         ],
         "nameserver": [
+            "119.29.29.29",
+            "223.5.5.5",
             "https://doh.pub/dns-query",
             //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
             /*"https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"*/
+        ],
+        "direct-nameserver": [
+            "system",
+            "223.5.5.5",
+            "119.29.29.29"
         ],
         /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
@@ -201,6 +238,8 @@ async function main(config) {
         },*/
         "nameserver-policy": {
             "geosite:cn": [
+                "119.29.29.29",
+                "223.5.5.5",
                 "https://doh.pub/dns-query",
                 "https://dns.alidns.com/dns-query"
             ],
@@ -295,8 +334,7 @@ async function main(config) {
             tolerance: 200,
             lazy: true,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         },
         {
             name: "🌍 国外媒体",
@@ -436,10 +474,9 @@ async function main(config) {
             url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: true,
+            lazy: false,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         },
         {
             name: "🇨🇳 台湾自动",
@@ -449,10 +486,9 @@ async function main(config) {
             url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: true,
+            lazy: false,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         },
         {
             name: "🇺🇲 美国自动",
@@ -463,10 +499,9 @@ async function main(config) {
             url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 250,
-            lazy: true,
+            lazy: false,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         },
         {
             name: "🇯🇵 日本自动",
@@ -476,10 +511,9 @@ async function main(config) {
             url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: true,
+            lazy: false,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         },
         {
             name: "🇸🇬 狮城自动",
@@ -489,10 +523,9 @@ async function main(config) {
             url: "https://cp.cloudflare.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: true,
+            lazy: false,
             timeout: 5000,
-            "max-failed-times": 5,
-            retry: 3
+            "max-failed-times": 3
         }
     ];
     // 赋值给 config["proxy-groups"]
@@ -732,7 +765,7 @@ async function main(config) {
         { type: "provider", name: "ChinaIP", group: "🎯 全球直连", noResolve: true },
 
         //兜底
-        { type: "rule", value: "MATCH,🚀 节点选择" },
+        { type: "rule", value: "MATCH,🐟 漏网之鱼" },
 
     ];
 
@@ -757,7 +790,11 @@ async function main(config) {
             await jitterDelay(200, 500);
 
             try {
-                const text = await fetchWithRetry(provider.url, 3);
+                const text = await fetchWithRetry(
+                    provider.url,
+                    3,      // 最多尝试3次
+                    10000   // 每次最多等待10秒
+                );
 
                 const lines = text
                     .split("\n")
