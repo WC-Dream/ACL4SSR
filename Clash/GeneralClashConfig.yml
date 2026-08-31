@@ -94,6 +94,9 @@ dns:
        - 'alt6-mtalk.google.com'
        - 'alt7-mtalk.google.com'
        - 'alt8-mtalk.google.com'
+       - 'android.apis.google.com'
+       - 'device-provisioning.googleapis.com'
+       - 'firebaseinstallations.googleapis.com'
   default-nameserver:
     - 119.29.29.29
     - 223.5.5.5
@@ -107,7 +110,6 @@ dns:
     #- https://dns.google/dns-query
     #- https://public.dns.iij.jp/dns-query
   direct-nameserver: 
-    - system
     - 223.5.5.5
     - 119.29.29.29  
   nameserver-policy:
@@ -118,6 +120,7 @@ dns:
       - https://dns.alidns.com/dns-query
     'geosite:geolocation-!cn':
       - https://dns.cloudflare.com/dns-query
+      - https://dns10.quad9.net/dns-query
       - https://dns.google/dns-query
     
   proxy-server-nameserver:

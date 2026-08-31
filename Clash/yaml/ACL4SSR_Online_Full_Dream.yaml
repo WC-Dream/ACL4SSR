@@ -453,7 +453,6 @@ dns:
   #  - https://public.dns.iij.jp/dns-query
   #  - https://dns.google/dns-query
   direct-nameserver: 
-    - system
     - 223.5.5.5
     - 119.29.29.29
   proxy-server-nameserver:
@@ -493,6 +492,7 @@ dns:
       - "https://dns.alidns.com/dns-query"
     "geosite:geolocation-!cn":
       - "https://cloudflare-dns.com/dns-query"
+      - "https://dns10.quad9.net/dns-query"
       - "https://dns.google/dns-query"
     #"geosite:gfw":
      # - "https://cloudflare-dns.com/dns-query"

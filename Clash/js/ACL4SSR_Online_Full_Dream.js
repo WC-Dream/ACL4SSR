@@ -135,7 +135,10 @@ async function main(config) {
             "alt5-mtalk.google.com",
             "alt6-mtalk.google.com",
             "alt7-mtalk.google.com",
-            "alt8-mtalk.google.com"
+            "alt8-mtalk.google.com",
+            "android.apis.google.com",
+            "device-provisioning.googleapis.com",
+            "firebaseinstallations.googleapis.com"
         ],
         "skip-dst-address": [
             "0.0.0.0/8",
@@ -211,7 +214,7 @@ async function main(config) {
             "https://dns.alidns.com/dns-query"
         ],
         "direct-nameserver": [
-            "system",
+            //"system",
             "223.5.5.5",
             "119.29.29.29"
         ],
@@ -238,6 +241,7 @@ async function main(config) {
             ],
             "geosite:geolocation-!cn": [
                 "https://cloudflare-dns.com/dns-query",
+                "https://dns10.quad9.net/dns-query",
                 "https://dns.google/dns-query"
             ],
 
@@ -290,7 +294,10 @@ async function main(config) {
             "alt5-mtalk.google.com",
             "alt6-mtalk.google.com",
             "alt7-mtalk.google.com",
-            "alt8-mtalk.google.com"
+            "alt8-mtalk.google.com",
+            "android.apis.google.com",
+            "device-provisioning.googleapis.com",
+            "firebaseinstallations.googleapis.com"
         ]
     };
 
