@@ -209,10 +209,10 @@ async function main(config) {
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"*/
         ],
-        "direct-nameserver": [
+        /*"direct-nameserver": [
             "223.5.5.5",
             "119.29.29.29"
-        ],
+        ],*/
         /*"fallback": [
             "https://dns.cloudflare.com/dns-query",
             "https://public.dns.iij.jp/dns-query",

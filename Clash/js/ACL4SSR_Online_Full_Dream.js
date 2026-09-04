@@ -213,11 +213,12 @@ async function main(config) {
             //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query"
         ],
-        "direct-nameserver": [
+       
+        /*"direct-nameserver": [
             //"system",
             "223.5.5.5",
             "119.29.29.29"
-        ],
+        ],*/
   
         /*"fallback-filter": {
             "domain": [
