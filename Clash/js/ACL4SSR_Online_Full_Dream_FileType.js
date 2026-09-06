@@ -18,6 +18,29 @@ function looksLikeHtml(text) {
     return false;
 }
 
+// 强制 proxy-server-nameserver 使用 DIRECT
+function forceDnsDirect(server) {
+    if (typeof server !== "string") return server;
+
+    const dns = server.trim();
+    if (!dns) return dns;
+
+    // 已经是 #DIRECT / #direct / #Direct 等，统一成 #DIRECT
+    if (/#direct(?=$|&)/i.test(dns)) {
+        return dns.replace(/#direct(?=$|&)/i, "#DIRECT");
+    }
+
+    // 完全没有 # 参数，直接补 #DIRECT
+    if (!dns.includes("#")) {
+        return `${dns}#DIRECT`;
+    }
+
+    // 已经有 #RULES / #策略组 / 其他出口：
+    // 为了保证 DNS 强制直连，将 # 后第一个出口参数替换成 DIRECT
+    // 如果后面还有 &xxx 参数则保留
+    return dns.replace(/#[^&]*/, "#DIRECT");
+}
+
 // 带超时和重试的规则下载
 async function fetchWithRetry(url, maxAttempts = 3, timeoutMs = 12000) {
     let lastError;
@@ -176,14 +199,61 @@ async function main(config) {
         "auto-detect-interface": true
     }
 
+
+    // ==============================
+    // proxy-server-nameserver
+    // ==============================
+    
+    const rawProxyServerNameserver =
+        config.dns?.["proxy-server-nameserver"] ?? [
+            "https://doh.pub/dns-query#DIRECT",
+            "https://dns.alidns.com/dns-query#DIRECT"
+        ];
+    
+    const proxyServerNameserver = (
+        Array.isArray(rawProxyServerNameserver)
+            ? rawProxyServerNameserver
+            : [rawProxyServerNameserver]
+    ).map(forceDnsDirect);
+    
+    
+    // ==============================
+    // proxy-server-nameserver-policy
+    // ==============================
+    
+    const rawProxyServerNameserverPolicy =
+        config.dns?.["proxy-server-nameserver-policy"];
+    
+    let proxyServerNameserverPolicy;
+    
+    if (
+        rawProxyServerNameserverPolicy &&
+        typeof rawProxyServerNameserverPolicy === "object" &&
+        !Array.isArray(rawProxyServerNameserverPolicy)
+    ) {
+        proxyServerNameserverPolicy = Object.fromEntries(
+            Object.entries(rawProxyServerNameserverPolicy).map(
+                ([rule, servers]) => [
+                    rule,
+                    Array.isArray(servers)
+                        ? servers.map(forceDnsDirect)
+                        : forceDnsDirect(servers)
+                ]
+            )
+        );
+    }
+
+
+    /*
     const proxyServerNameserver = config.dns?.["proxy-server-nameserver"] ?? [
-        "https://doh.pub/dns-query",
+        "https://doh.pub/dns-query#DIRECT",
         //"https://223.5.5.5/dns-query",
-        "https://dns.alidns.com/dns-query"
+        "https://dns.alidns.com/dns-query#DIRECT"
     ];
 
     // 原配置存在 proxy-server-nameserver-policy 就原样保留
     const proxyServerNameserverPolicy = config.dns?.["proxy-server-nameserver-policy"];
+    */
 
     config.dns = {
         enable: true,
@@ -196,15 +266,15 @@ async function main(config) {
         "fake-ip-range": "198.18.0.1/16",
         rebind: false,
         "default-nameserver": [
-            "119.29.29.29",
-            "223.5.5.5"
+            "119.29.29.29#DIRECT",
+            "223.5.5.5#DIRECT"
         ],
         "nameserver": [
-            "119.29.29.29",
-            "223.5.5.5",
-            "https://doh.pub/dns-query",
+            "119.29.29.29#DIRECT",
+            "223.5.5.5#DIRECT",
+            "https://doh.pub/dns-query#DIRECT",
             //"https://223.5.5.5/dns-query",
-            "https://dns.alidns.com/dns-query"
+            "https://dns.alidns.com/dns-query#DIRECT"
             /*"https://cloudflare-dns.com/dns-query",
             "https://public.dns.iij.jp/dns-query",
             "https://dns.google/dns-query"*/
@@ -237,10 +307,10 @@ async function main(config) {
         },*/
         "nameserver-policy": {
             "geosite:cn": [
-                "119.29.29.29",
-                "223.5.5.5",
-                "https://doh.pub/dns-query",
-                "https://dns.alidns.com/dns-query"
+                "119.29.29.29#DIRECT",
+                "223.5.5.5#DIRECT",
+                "https://doh.pub/dns-query#DIRECT",
+                "https://dns.alidns.com/dns-query#DIRECT"
             ],
             "geosite:geolocation-!cn": [
                 "https://cloudflare-dns.com/dns-query",
@@ -268,240 +338,13 @@ async function main(config) {
                 "https://dns.alidns.com/dns-query"
             ],*/
         },
+        "fake-ip-filter-mode": "rule",
         "fake-ip-filter": [
-            "geosite:connectivity-check",
-            "geosite:private",
-            //"geosite:cn",
-                
-            // LAN
-            "*.lan",
-            "*.localdomain",
-            "*.example",
-            "*.invalid",
-            "*.localhost",
-            "*.test",
-            "*.local",
-            "*.home.arpa",
-            "*.direct",
-            "cable.auth.com",
-            "network-test.debian.org",
-            "detectportal.firefox.com",
-            "resolver1.opendns.com",
-            "global.turn.twilio.com",
-            "global.stun.twilio.com",
-            "app.yinxiang.com",
-            "injections.adguard.org",
-            "localhost.*.weixin.qq.com",
-            "*.blzstatic.cn",
-            "*.cmpassport.com",
-            "id6.me",
-            "open.e.189.cn",
-            "opencloud.wostore.cn",
-            "id.mail.wo.cn",
-            "mdn.open.wo.cn",
-            "hmrz.wo.cn",
-            "nishub1.10010.com",
-            "enrichgw.10010.com",
-            "*.wosms.cn",
-            "*.jegotrip.com.cn",
-            "*.icitymobile.mobi",
-            "*.pingan.com.cn",
-            "*.cmbchina.com",
-            "*.10099.com.cn",
-            "*.microdone.cn",
-            "PDC._msDCS.*.*",
-            "DC._msDCS.*.*",
-            "GC._msDCS.*.*",
-                
-            // 放行NTP服务
-            "time.*.com",
-            "time.*.gov",
-            "time.*.edu.cn",
-            "time.*.apple.com",
-            "time-ios.apple.com",
-            "time1.*.com",
-            "time2.*.com",
-            "time3.*.com",
-            "time4.*.com",
-            "time5.*.com",
-            "time6.*.com",
-            "time7.*.com",
-            "ntp.*.com",
-            "ntp1.*.com",
-            "ntp2.*.com",
-            "ntp3.*.com",
-            "ntp4.*.com",
-            "ntp5.*.com",
-            "ntp6.*.com",
-            "ntp7.*.com",
-            "*.time.edu.cn",
-            "*.ntp.org.cn",
-            "+.pool.ntp.org",
-            "time1.cloud.tencent.com",
-                
-            // 放行网易云音乐
-            "music.163.com",
-            "*.music.163.com",
-            "*.126.net",
-                
-            // 百度音乐
-            "musicapi.taihe.com",
-            "music.taihe.com",
-                
-            // 酷狗音乐
-            "songsearch.kugou.com",
-            "trackercdn.kugou.com",
-                
-            // 酷我音乐
-            "*.kuwo.cn",
-                
-            // JOOX音乐
-            "api-jooxtt.sanook.com",
-            "api.joox.com",
-            "joox.com",
-                
-            // QQ音乐
-            "y.qq.com",
-            "*.y.qq.com",
-            "streamoc.music.tc.qq.com",
-            "mobileoc.music.tc.qq.com",
-            "isure.stream.qqmusic.qq.com",
-            "dl.stream.qqmusic.qq.com",
-            "aqqmusic.tc.qq.com",
-            "amobile.music.tc.qq.com",
-                
-            // 虾米音乐
-            "*.xiami.com",
-                
-            // 咪咕音乐
-            "*.music.migu.cn",
-            "music.migu.cn",
-                
-            // Win10 本地连接检测
-            "+.msftconnecttest.com",
-            "+.msftncsi.com",
-                
-            // QQ登录
-            "localhost.ptlogin2.qq.com",
-            "localhost.sec.qq.com",
-            "+.qq.com",
-            "+.tencent.com",
-                
-            // Nintendo Switch
-            "+.srv.nintendo.net",
-            "*.n.n.srv.nintendo.net",
-            "+.cdn.nintendo.net",
-                
-            // Sony PlayStation
-            "+.stun.playstation.net",
-                
-            // Microsoft Xbox
-            "xbox.*.*.microsoft.com",
-            "*.*.xboxlive.com",
-            "xbox.*.microsoft.com",
-            "xnotify.xboxlive.com",
-                
-            // Wotgame
-            "+.battle.net",
-            "+.battlenet.com.cn",
-            "+.wotgame.cn",
-            "+.wggames.cn",
-            "+.wowsgame.cn",
-            "+.wargaming.net",
-                
-            // Golang
-            "proxy.golang.org",
-                
-            // STUN
-            "stun.*.*",
-            "stun.*.*.*",
-            "+.stun.*.*",
-            "+.stun.*.*.*",
-            "+.stun.*.*.*.*",
-            "+.stun.*.*.*.*.*",
-                
-            // Linksys Router
-            "heartbeat.belkin.com",
-            "*.linksys.com",
-            "*.linksyssmartwifi.com",
-                
-            // ASUS Router
-            "*.router.asus.com",
-                
-            // Apple Software Update Service
-            "mesu.apple.com",
-            "swscan.apple.com",
-            "swquery.apple.com",
-            "swdownload.apple.com",
-            "swcdn.apple.com",
-            "swdist.apple.com",
-                
-            // Google
-            "lens.l.google.com",
-            "stun.l.google.com",
-            "na.b.g-tun.com",
-                
-            // Google Android / FCM
-            "mtalk.google.com",
-            "mtalk4.google.com",
-            "mtalk-staging.google.com",
-            "mtalk-dev.google.com",
-            "alt1-mtalk.google.com",
-            "alt2-mtalk.google.com",
-            "alt3-mtalk.google.com",
-            "alt4-mtalk.google.com",
-            "alt5-mtalk.google.com",
-            "alt6-mtalk.google.com",
-            "alt7-mtalk.google.com",
-            "alt8-mtalk.google.com",
-            "android.apis.google.com",
-            "device-provisioning.googleapis.com",
-            "firebaseinstallations.googleapis.com",
-                
-            // Netflix
-            "+.nflxvideo.net",
-                
-            // Final Fantasy XIV
-            "*.square-enix.com",
-            "*.finalfantasyxiv.com",
-            "*.ffxiv.com",
-            "*.ff14.sdo.com",
-            "ff.dorado.sdo.com",
-                
-            // Bilibili
-            "*.mcdn.bilivideo.cn",
-                
-            // Disney Plus
-            "+.media.dssott.com",
-                
-            // shark007 Codecs
-            "shark007.net",
-                
-            // Mijia
-            "Mijia Cloud",
-                
-            // 招商银行
-            "+.cmbchina.com",
-            "+.cmbimg.com",
-                
-            // AdGuard
-            "local.adguard.org",
-                
-            // 迅雷
-            "+.sandai.net",
-            "+.n0808.com",
-                
-            // UU Plugin
-            "+.uu.163.com",
-            "ps.res.netease.com",
-                
-            // Wifi Calling
-            "+.pub.3gppnetwork.org"
-                
-            // GEOSITE(Meta core)
-            // "geosite:category-games",
-            // "geosite:apple-cn",
-            // "geosite:google-cn"
+            "GEOSITE,private,real-ip",
+            "GEOSITE,connectivity-check,real-ip",
+            "GEOSITE,category-ntp,real-ip",
+            "RULE-SET,FakeIPFilter,real-ip",
+            "MATCH,fake-ip"
         ]
 
         /*
@@ -929,6 +772,14 @@ async function main(config) {
             interval: 86400,
             url: "https://ruleset.skk.moe/List/ip/china_ip.conf",
             path: "./ruleset/MoeChinaIP.txt",
+        },
+        FakeIPFilter: {
+            type: "http",
+            behavior: "classical",
+            format: "text",
+            interval: 86400,
+            url: "https://raw.githubusercontent.com/WC-Dream/ACL4SSR/WD/Clash/FakeIPFilter.list",
+            path: "./ruleset/FakeIPFilter.txt",
         }
         // SpeedTest: {
         //     type: "http",
