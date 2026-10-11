@@ -174,13 +174,14 @@ async function main(config) {
             "any:53"
         ],
         mtu: 1500,
-        "disable-icmp-forwarding": true,
+        //"disable-icmp-forwarding": true,
         device: "Mihomo",
         "auto-detect-interface": true
     }
 
     config.dns = {
         enable: true,
+        "cache-algorithm": "arc",
         ipv6: false,
         "prefer-h3": false,
         "use-hosts": true,
@@ -196,6 +197,7 @@ async function main(config) {
         "nameserver": [
             "119.29.29.29#DIRECT",
             "223.5.5.5#DIRECT",
+            "tls://dot.pub:853#DIRECT",
             "https://doh.pub/dns-query#DIRECT",
             //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query#DIRECT"
@@ -209,6 +211,7 @@ async function main(config) {
             "https://dns.google/dns-query"
         ],*/
         "proxy-server-nameserver": [
+            "tls://dot.pub:853#DIRECT",
             "https://doh.pub/dns-query#DIRECT",
             //"https://223.5.5.5/dns-query",
             "https://dns.alidns.com/dns-query#DIRECT"
@@ -237,13 +240,19 @@ async function main(config) {
             "geosite:cn": [
                 "119.29.29.29#DIRECT",
                 "223.5.5.5#DIRECT",
+                "tls://dot.pub:853#DIRECT",
                 "https://doh.pub/dns-query#DIRECT",
                 "https://dns.alidns.com/dns-query#DIRECT"
             ],
+            "geosite:gfw": [
+                "https://cloudflare-dns.com/dns-query#♻️ 自动选择",
+                "https://dns10.quad9.net/dns-query#♻️ 自动选择",
+                "https://dns.google/dns-query#♻️ 自动选择"
+            ],
             "geosite:geolocation-!cn": [
-                "https://cloudflare-dns.com/dns-query",
-                "https://dns10.quad9.net/dns-query",
-                "https://dns.google/dns-query"
+                "https://cloudflare-dns.com/dns-query#♻️ 自动选择",
+                "https://dns10.quad9.net/dns-query#♻️ 自动选择",
+                "https://dns.google/dns-query#♻️ 自动选择"
             ],
 
             /*"geosite:gfw": [
