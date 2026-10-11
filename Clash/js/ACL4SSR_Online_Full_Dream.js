@@ -84,8 +84,8 @@ async function fetchWithRetry(url, maxAttempts = 3, timeoutMs = 12000) {
 async function main(config) {
 
     //config["disable-keep-alive"] = false;
-    //config["keep-alive-idle"] = 60;
-    //config["keep-alive-interval"] = 45;
+    config["keep-alive-idle"] = 30;
+    config["keep-alive-interval"] = 15;
     config["tcp-concurrent"] = true;
 
 
@@ -486,7 +486,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
             timeout: 5000,
             "max-failed-times": 3
         },
@@ -498,7 +498,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
             timeout: 5000,
             "max-failed-times": 3
         },
@@ -511,7 +511,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 250,
-            lazy: false,
+            lazy: true,
             timeout: 5000,
             "max-failed-times": 3
         },
@@ -523,7 +523,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
             timeout: 5000,
             "max-failed-times": 3
         },
@@ -535,7 +535,7 @@ async function main(config) {
             url: "https://www.gstatic.com/generate_204",
             interval: 300,
             tolerance: 150,
-            lazy: false,
+            lazy: true,
             timeout: 5000,
             "max-failed-times": 3
         }
