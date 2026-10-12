@@ -245,15 +245,15 @@ async function main(config) {
                 "https://dns.alidns.com/dns-query#DIRECT"
             ],
             "geosite:gfw": [
-                "https://cloudflare-dns.com/dns-query#♻️ 自动选择",
-                "https://dns10.quad9.net/dns-query#♻️ 自动选择",
-                "https://dns.google/dns-query#♻️ 自动选择"
+                "https://cloudflare-dns.com/dns-query",
+                "https://dns10.quad9.net/dns-query",
+                "https://dns.google/dns-query"
             ],
             "geosite:geolocation-!cn": [
                 "tls://dot.pub:853#DIRECT",
                 "https://doh.pub/dns-query#DIRECT",
                 "https://dns.alidns.com/dns-query#DIRECT",
-                "https://cloudflare-dns.com/dns-query#♻️ 自动选择",
+                "https://cloudflare-dns.com/dns-query",
             ],
 
             /*"geosite:gfw": [
